@@ -5,18 +5,18 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import {
   addVimeoDemoData,
   clearVimeoVideosData,
-} from '../../store/getSingleVimeoVideo/actions';
+} from '../../store/getVimeoVideos/actions';
 import {
   addYoutubeDemoData,
   clearYoutubeVideosData,
-} from '../../store/getSingleYoutubeVideo/actions';
+} from '../../store/getYoutubeVideos/actions';
 import {
   setDisplayStarted,
   setFavoriteStarted,
   setOrderStarted,
 } from './../../store/changePanelValues/actions';
 
-export const MainPanel = (props: any) => {
+export const MainPanel = () => {
   const dispatch = useDispatch();
 
   const handleDisplayChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,8 +36,7 @@ export const MainPanel = (props: any) => {
     dispatch(clearYoutubeVideosData());
   };
 
-  const loadDemo = (e: any) => {
-    e.preventDefault();
+  const loadDemo = () => {
     dispatch(addYoutubeDemoData());
     dispatch(addVimeoDemoData());
   };

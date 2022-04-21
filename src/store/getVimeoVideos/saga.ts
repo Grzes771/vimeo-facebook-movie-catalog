@@ -2,7 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { getType } from 'typesafe-actions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getVimeoData } from './../../common/axios/vimeo-api';
+import { getVimeoData } from '../../common/axios/vimeo-api';
 
 import { getVimeoVideosStarted } from './actions';
 import * as C from './consts';

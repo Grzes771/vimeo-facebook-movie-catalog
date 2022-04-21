@@ -2,7 +2,6 @@ import { getType } from 'typesafe-actions';
 import { Action } from '../types/actions';
 import { TVideosArrItem } from '../types/movie-item';
 import { setVideoDetailsStarted, setModalActiveStarted } from './actions';
-import { SET_VIDEO_DETAILS, SET_MODAL_IS_ACTIVE } from './consts';
 
 export type TVideoModalDataState = {
   isOpen: boolean;
@@ -18,7 +17,10 @@ export const initialState: TVideoModalDataState = {
   isLoading: false,
 };
 
-export const videoModal = (state = initialState, action: Action): any => {
+export const videoModal = (
+  state = initialState,
+  action: Action
+): TVideoModalDataState => {
   switch (action.type) {
     case getType(setModalActiveStarted):
       return {
@@ -29,7 +31,7 @@ export const videoModal = (state = initialState, action: Action): any => {
     case getType(setVideoDetailsStarted):
       return {
         ...state,
-        videoDetails: action.payload,
+        videoDetails: action.payload.video,
       };
     default:
       return { ...state };

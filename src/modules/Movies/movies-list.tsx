@@ -7,9 +7,9 @@ import { youtubeVideosDataRX } from '../../store/getYoutubeVideos/selectors';
 import { vimeoVideosDataRX } from '../../store/getVimeoVideos/selectors';
 import { favVideo, getLocalStorage } from '../../helpers/local-storage';
 import { TVideosArrItem } from '../../store/types/movie-item';
-import { Nav } from '../Nav/Nav';
 
 import './style.css';
+import { Nav } from '../Nav/index';
 
 export const MovieList = () => {
   const [currentPage, setCurrentPage] = useState(0);

@@ -25,9 +25,9 @@ const ModalInnerVideo: React.FC = () => {
 
   const singleModalVideoData = useSelector(singleModalVideosDataRX);
   const singleModalVideo = {
-    title: singleModalVideoData?.video.title,
-    platform: singleModalVideoData?.video.platform,
-    url: singleModalVideoData?.video.path,
+    title: singleModalVideoData?.title,
+    platform: singleModalVideoData?.platform,
+    url: singleModalVideoData?.path,
   };
 
   const isModalOpenedData = useSelector(modalIsOpenRX);
@@ -57,6 +57,7 @@ const ModalInnerVideo: React.FC = () => {
         ) : (
           //@ts-ignore
           <Vimeo
+            //@ts-ignore
             video={singleModalVideo.url}
             autoplay
             width="300px"

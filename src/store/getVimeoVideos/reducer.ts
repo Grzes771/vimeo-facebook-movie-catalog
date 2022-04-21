@@ -1,5 +1,5 @@
 import { getType } from 'typesafe-actions';
-import { vimeoDemo } from '../../common/demo/vimeoDemo';
+import { vimeoDemo } from '../../common/demo/vimeo-demo';
 import { Action } from '../types/actions';
 import { TVideosArrItem } from '../types/movie-item';
 import { getVimeoVideosStarted } from './actions';
@@ -8,6 +8,7 @@ import {
   SET_VIMEO_FAVORITE,
   CLEAR_VIMEO_VIDEOS_DATA,
   ADD_VIMEO_DEMO_DATA,
+  DELETE_SINGLE_VIMEO_VIDEO,
 } from './consts';
 
 export type TGetVimeoVideosDataState = {
@@ -22,7 +23,10 @@ export const initialState: TGetVimeoVideosDataState = {
   vimeoVideos: [],
 };
 
-export const getVimeoVideos = (state = initialState, action: Action): any => {
+export const getVimeoVideos = (
+  state = initialState,
+  action: Action
+): TGetVimeoVideosDataState => {
   switch (action.type) {
     case getType(getVimeoVideosStarted):
       return {
@@ -54,6 +58,13 @@ export const getVimeoVideos = (state = initialState, action: Action): any => {
           vimeoVideo.path === action.payload.url
             ? { ...vimeoVideo, favorite: !vimeoVideo.favorite }
             : vimeoVideo
+        ),
+      };
+    case DELETE_SINGLE_VIMEO_VIDEO:
+      return {
+        ...state,
+        vimeoVideos: state.vimeoVideos.filter(
+          (arrItem) => arrItem.date !== action.payload.movie.date
         ),
       };
     case ADD_VIMEO_DEMO_DATA:

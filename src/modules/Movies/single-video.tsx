@@ -11,9 +11,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { setInputDataRX } from '../../store/changePanelValues/selector';
 import { addItemToLS, removeItemFromLS } from '../../helpers/local-storage';
-import { setYtFavorite } from '../../store/getYoutubeVideos/actions';
+import {
+  deleteSingleYoutubeVideo,
+  setYtFavorite,
+} from '../../store/getYoutubeVideos/actions';
 import { TVideosArrItem } from '../../store/types/movie-item';
-import { setVimeoFavorite } from '../../store/getVimeoVideos/actions';
+import {
+  deleteSingleVimeoVideo,
+  setVimeoFavorite,
+} from '../../store/getVimeoVideos/actions';
 import {
   setModalActiveStarted,
   setVideoDetailsStarted,
@@ -58,7 +64,10 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
     dispatch(setModalActiveStarted(true));
     dispatch(setVideoDetailsStarted(movie));
   };
-
+  const handleDeleteSingleMovie = () => {
+    dispatch(deleteSingleYoutubeVideo(movie));
+    dispatch(deleteSingleVimeoVideo(movie));
+  };
   return (
     <Card
       data-testid="card"
@@ -100,7 +109,11 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
           {`${new Date(movie.date).toLocaleString()}`}
         </span>
         <span>
-          <FontAwesomeIcon data-testid="remove-icon" icon={faTrashAlt} />
+          <FontAwesomeIcon
+            data-testid="remove-icon"
+            icon={faTrashAlt}
+            onClick={handleDeleteSingleMovie}
+          />
         </span>
         <span>
           <FontAwesomeIcon
