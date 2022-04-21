@@ -1,11 +1,11 @@
-# movie-catalog
+# vimeo-youtube-movie-catalog
 
 ![logo](./public/logo.jpg)
 
-## Table of contents
+## Content
 
-- [movie-catalog](#movie-catalog)
-  - [Table of contents](#table-of-contents)
+- [vimeo-youtube-movie-catalog](#movie-catalog)
+  - [Table of contents](#content)
   - [General info](#general-info)
   - [Setup](#setup)
   - [Features](#features)
@@ -40,3 +40,6 @@ This project is created with:
 - [ReactJS](https://pl.reactjs.org/)
 - [Reactstrap](https://reactstrap.github.io/)
 - [TypeScript](https://www.typescriptlang.org/)
+- [Redux](https://react-redux.js.org/)
+- [Saga-Redux](https://redux-saga.js.org/)
+- [React-Toastify](https://www.npmjs.com/package/react-toastify)

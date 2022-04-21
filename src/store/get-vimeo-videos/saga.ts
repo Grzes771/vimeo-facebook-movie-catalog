@@ -23,8 +23,8 @@ export function* getSingleVimeoVideo({
     if (!request.data?.data?.length) {
       toast.error('Video not found');
       yield put({
-        type: C.GET_VIMEO_VIDEOS_DATA.failure,
-        payload: { error: 'Something went wrong' },
+        type: C.GET_VIMEO_VIDEOS_DATA.success,
+        payload: [],
       });
     }
 

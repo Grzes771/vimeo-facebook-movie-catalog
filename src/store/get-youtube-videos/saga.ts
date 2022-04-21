@@ -21,8 +21,8 @@ export function* getYoutubeVideos({
     if (!request.data?.items?.length) {
       toast.error('Video not found');
       yield put({
-        type: C.GET_YOUTUBE_VIDEOS_DATA.failure,
-        payload: { error: 'Something went wrong' },
+        type: C.GET_YOUTUBE_VIDEOS_DATA.success,
+        payload: [],
       });
     }
 
