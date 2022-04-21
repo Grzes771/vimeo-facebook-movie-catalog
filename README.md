@@ -1,6 +1,6 @@
 # movie-catalog
 
-![logo](https://github.com/Grzes771/vimeo-youtube-movie-catalog)
+![logo](./public/logo.jpg)
 
 ## Table of contents
 
