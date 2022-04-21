@@ -1,40 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import { Col, Row } from 'reactstrap';
-import './App.css';
+
 import { Formular } from './modules/Form/Form';
-import { MainPanel } from './modules/MainPanel/MainPanel';
-import { MovieList } from './modules/Movies/MoviesList';
-import useLocalStorage from './helpers/useLocalStorage';
+import { MainPanel } from './modules/MainPanel';
+import { MovieList } from './modules/Movies/movies-list';
+import { ModalShowVideo } from './modules/Modal';
 
-
-
+import './App.css';
 function App() {
-  
-  const [videosLocalContainer, setVideosLocalContainer] = useLocalStorage('videosLocalStorage', [])
-useEffect(() => {
-
- console.log(videosLocalContainer)
-  },[])
-
-    const [panelData, setPanelData] = useState({
-    display: 'vertical',
-    favorite: 'all',
-    order: 'newest',
-    });
-  
   return (
     <div className="App">
-      <Formular videosLocalContainer={videosLocalContainer}
-            setVideosLocalContainer={setVideosLocalContainer}/>
+      <Formular />
       <Row>
-        <Col md="2"><MainPanel setPanelData={setPanelData} setVideosLocalContainer={setVideosLocalContainer }/></Col>
+        <Col md="2">
+          <MainPanel />
+        </Col>
         <Col md="10">
-          <MovieList panelData={panelData} videosLocalContainer={videosLocalContainer}
-            setVideosLocalContainer={setVideosLocalContainer}/>
+          <MovieList />
         </Col>
       </Row>
-      
+      <ModalShowVideo />
     </div>
   );
 }
