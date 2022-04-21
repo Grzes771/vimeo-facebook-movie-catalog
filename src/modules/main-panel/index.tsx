@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 import {
   addVimeoDemoData,
   clearVimeoVideosData,
-} from '../../store/getVimeoVideos/actions';
+} from '../../store/get-vimeo-videos/actions';
 import {
   addYoutubeDemoData,
   clearYoutubeVideosData,
-} from '../../store/getYoutubeVideos/actions';
+} from '../../store/get-youtube-videos/actions';
 import {
   setDisplayStarted,
   setFavoriteStarted,
   setOrderStarted,
-} from './../../store/changePanelValues/actions';
+} from '../../store/change-panel-values/actions';
 
-export const MainPanel = () => {
+type TProps = {
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+};
+export const MainPanel = (props: TProps) => {
+  const { setCurrentPage } = props;
+
   const dispatch = useDispatch();
 
   const handleDisplayChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,10 +31,12 @@ export const MainPanel = () => {
 
   const handleFavoriteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setFavoriteStarted(event.target.value));
+    setCurrentPage(0);
   };
 
   const handleOrderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setOrderStarted(event.target.value));
+    setCurrentPage(0);
   };
 
   const removeData = () => {

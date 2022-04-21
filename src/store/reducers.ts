@@ -2,15 +2,15 @@ import { combineReducers } from 'redux';
 import {
   getYoutubeVideos,
   TGetYoutubeVideosDataState,
-} from './getYoutubeVideos/reducer';
+} from './get-youtube-videos/reducer';
 import {
   getVimeoVideos,
   TGetVimeoVideosDataState,
-} from './getVimeoVideos/reducer';
+} from './get-vimeo-videos/reducer';
 import {
   inputValueChange,
   TSelectActionState,
-} from './changePanelValues/reducer';
+} from './change-panel-values/reducer';
 import { videoModal, TVideoModalDataState } from './modal/reducer';
 
 export type AppState = {

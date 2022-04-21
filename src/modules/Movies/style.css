@@ -1,72 +1,70 @@
 .movies-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-   
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.card{
-    width: 400px;
-    justify-content: space-between;
-}
-
-.card-title{
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.card {
+  width: 400px;
+  justify-content: space-between;
 }
 
-.card-horizontal{
-    width: 80%;
-    transition: 1s all;
+.card-title {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-hide{
-    display: none;
+.card-horizontal {
+  width: 80%;
+  transition: 1s all;
+}
+
+.card-hide {
+  display: none;
 }
 
 .card-body {
-    padding: 0!important;
+  padding: 0 !important;
+  cursor: pointer;
 }
 
-.card-body-horizontal{
-    height: 300px!important;
+.card-body-horizontal {
+  height: 300px !important;
 }
 
 .data-slice {
-    margin: 0px auto 30px auto!important;
+  margin: 0px auto 30px auto !important;
 }
 
-.card-footer{
-    display: flex;
-    justify-content: space-evenly;
+.card-footer {
+  display: flex;
+  justify-content: space-evenly;
 }
 
-.card-img-top{
-    height: 100%;
+.card-img-top {
+  height: 100%;
 }
 
-.card-img-horizontal{
-    height: 300px;
+.card-img-horizontal {
+  height: 300px;
 }
 
-.fa-trash-can:hover{
-    cursor: pointer;
-    color: red;
+.fa-trash-can:hover {
+  cursor: pointer;
+  color: red;
 }
 
-.fa-star:hover{
-    cursor: pointer;
-   
+.fa-star:hover {
+  cursor: pointer;
 }
 
-
-.active-star{
-    color: purple!important;
+.active-star {
+  color: purple !important;
 }
 
 .spinner-container {
-    width: 500px;
-    margin: 40px auto;
-    font-size: 50px;
+  width: 500px;
+  margin: 40px auto;
+  font-size: 50px;
 }

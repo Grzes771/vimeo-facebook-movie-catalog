@@ -9,21 +9,18 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setInputDataRX } from '../../store/changePanelValues/selector';
+import { setInputDataRX } from '../../store/change-panel-values/selector';
 import { addItemToLS, removeItemFromLS } from '../../helpers/local-storage';
 import {
   deleteSingleYoutubeVideo,
   setYtFavorite,
-} from '../../store/getYoutubeVideos/actions';
+} from '../../store/get-youtube-videos/actions';
 import { TVideosArrItem } from '../../store/types/movie-item';
 import {
   deleteSingleVimeoVideo,
   setVimeoFavorite,
-} from '../../store/getVimeoVideos/actions';
-import {
-  setModalActiveStarted,
-  setVideoDetailsStarted,
-} from '../../store/modal/actions';
+} from '../../store/get-vimeo-videos/actions';
+import { setModalActive, setVideoDetails } from '../../store/modal/actions';
 
 import {
   faClock,
@@ -61,8 +58,8 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
     display: showDisplayInputStoreValue.display,
   };
   const handleOpenModal = () => {
-    dispatch(setModalActiveStarted(true));
-    dispatch(setVideoDetailsStarted(movie));
+    dispatch(setModalActive(true));
+    dispatch(setVideoDetails(movie));
   };
   const handleDeleteSingleMovie = () => {
     dispatch(deleteSingleYoutubeVideo(movie));

@@ -1,4 +1,5 @@
 import { createAction } from 'typesafe-actions';
+import { TVideosArrItem } from '../types/movie-item';
 
 import {
   GET_VIMEO_VIDEOS_DATA,
@@ -34,5 +35,5 @@ export const addVimeoDemoData = createAction(ADD_VIMEO_DEMO_DATA, () => ({}))();
 
 export const deleteSingleVimeoVideo = createAction(
   DELETE_SINGLE_VIMEO_VIDEO,
-  (movie) => ({ movie })
+  (movie: TVideosArrItem) => ({ movie })
 )();

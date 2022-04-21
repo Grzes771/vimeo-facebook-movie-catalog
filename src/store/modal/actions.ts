@@ -7,14 +7,14 @@ type TSetModalActiveStarted = {
   value: string;
 };
 
-export const setModalActiveStarted = createAction(
+export const setModalActive = createAction(
   SET_MODAL_IS_ACTIVE,
   (value): TSetModalActiveStarted => ({
     value,
   })
 )();
 
-export const setVideoDetailsStarted = createAction(
+export const setVideoDetails = createAction(
   SET_VIDEO_DETAILS,
   (video: TVideosArrItem) => ({
     video,

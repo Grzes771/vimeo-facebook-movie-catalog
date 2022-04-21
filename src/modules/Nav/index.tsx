@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-import { setInputDataRX } from '../../store/changePanelValues/selector';
+import { setInputDataRX } from '../../store/change-panel-values/selector';
 import { TVideosArrItem } from '../../store/types/movie-item';
 
 import './style.css';
@@ -10,7 +10,7 @@ import './style.css';
 type Props = {
   filterAndSort: TVideosArrItem[];
   filterAndSortFavorite: TVideosArrItem[] | undefined;
-  setCurrentPage: (value: number) => void;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
   currentPage: number;
 };
 
