@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Col, Row } from 'reactstrap';
 
-import { Formular } from './modules/form';
+import { SearchForm } from './modules/search-form';
 import { MainPanel } from './modules/main-panel';
 import { MovieList } from './modules/movies/movies-list';
 import { ModalShowVideo } from './modules/modal';
@@ -13,7 +13,7 @@ export const App = () => {
   const [currentPage, setCurrentPage] = useState(0);
   return (
     <div className="App">
-      <Formular />
+      <SearchForm />
       <Row>
         <Col md="2">
           <MainPanel

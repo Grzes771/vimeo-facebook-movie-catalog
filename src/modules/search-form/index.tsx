@@ -8,7 +8,7 @@ import { getVideoId } from './helpers';
 
 import './style.css';
 
-export const Formular = () => {
+export const SearchForm = () => {
   const [link, setLink] = useState('');
   const dispatch = useDispatch();
 
