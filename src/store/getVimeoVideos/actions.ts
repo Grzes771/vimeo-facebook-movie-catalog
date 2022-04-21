@@ -5,6 +5,7 @@ import {
   SET_VIMEO_FAVORITE,
   CLEAR_VIMEO_VIDEOS_DATA,
   ADD_VIMEO_DEMO_DATA,
+  DELETE_SINGLE_VIMEO_VIDEO,
 } from './consts';
 
 type TGetVimeoVideosStarted = {
@@ -30,3 +31,8 @@ export const clearVimeoVideosData = createAction(
   () => ({})
 )();
 export const addVimeoDemoData = createAction(ADD_VIMEO_DEMO_DATA, () => ({}))();
+
+export const deleteSingleVimeoVideo = createAction(
+  DELETE_SINGLE_VIMEO_VIDEO,
+  (movie) => ({ movie })
+)();

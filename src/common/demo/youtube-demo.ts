@@ -1,4 +1,6 @@
-export const youtubeDemo = [
+import { TVideosArrItem } from '../../store/types/movie-item';
+
+export const youtubeDemo: TVideosArrItem[] = [
   {
     date: 1650387611752,
     platform: 'youtube',
@@ -12,41 +14,41 @@ export const youtubeDemo = [
   {
     date: 1650534193731,
     favorite: false,
-    likes: '16796',
+    likes: 16796,
     path: 'zfwGiieFkKo',
     platform: 'youtube',
     thumbNails: 'https://i.ytimg.com/vi/zfwGiieFkKo/mqdefault.jpg',
     title: 'Dżem - Whiskey',
-    viewsCount: '3369281',
+    viewsCount: 3369281,
   },
   {
     date: 1650534292079,
     favorite: false,
-    likes: '785697',
+    likes: 785697,
     path: 'rGedjDnQ9cw',
     platform: 'youtube',
     thumbNails: 'https://i.ytimg.com/vi/rGedjDnQ9cw/mqdefault.jpg',
     title: 'New Divide [Official Live in Red Square 2011] - Linkin Park',
-    viewsCount: '116690283',
+    viewsCount: 116690283,
   },
   {
     date: 1650534343925,
     favorite: false,
-    likes: '750',
+    likes: 750,
     path: 'gNQd3wrxlL0',
     platform: 'youtube',
     thumbNails: 'https://i.ytimg.com/vi/gNQd3wrxlL0/mqdefault.jpg',
     title: 'CZAQU - "Inność" - wydanie 2003',
-    viewsCount: '100012',
+    viewsCount: 100012,
   },
   {
     date: 1650534360939,
     favorite: false,
-    likes: '29',
+    likes: 29,
     path: 'GNrsu95C-Yw',
     platform: 'youtube',
     thumbNails: 'https://i.ytimg.com/vi/GNrsu95C-Yw/mqdefault.jpg',
     title: 'CZAQU - Zdumiony',
-    viewsCount: '2192',
+    viewsCount: 2192,
   },
 ];

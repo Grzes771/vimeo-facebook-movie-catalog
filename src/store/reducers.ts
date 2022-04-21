@@ -2,11 +2,11 @@ import { combineReducers } from 'redux';
 import {
   getYoutubeVideos,
   TGetYoutubeVideosDataState,
-} from './getSingleYoutubeVideo/reducer';
+} from './getYoutubeVideos/reducer';
 import {
   getVimeoVideos,
   TGetVimeoVideosDataState,
-} from './getSingleVimeoVideo/reducer';
+} from './getVimeoVideos/reducer';
 import {
   inputValueChange,
   TSelectActionState,

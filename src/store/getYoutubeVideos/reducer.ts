@@ -1,5 +1,5 @@
 import { getType } from 'typesafe-actions';
-import { youtubeDemo } from '../../common/demo/youtubeDemo';
+import { youtubeDemo } from '../../common/demo/youtube-demo';
 import { Action } from '../types/actions';
 import { TVideosArrItem } from '../types/movie-item';
 import { getYoutubeVideosStarted } from './actions';
@@ -8,6 +8,7 @@ import {
   SET_YT_FAVORITE,
   CLEAR_YT_VIDEOS_DATA,
   ADD_YT_DEMO_DATA,
+  DELETE_SINGLE_YT_VIDEO,
 } from './consts';
 
 export type TGetYoutubeVideosDataState = {
@@ -22,7 +23,10 @@ export const initialState: TGetYoutubeVideosDataState = {
   youtubeVideos: [],
 };
 
-export const getYoutubeVideos = (state = initialState, action: Action): any => {
+export const getYoutubeVideos = (
+  state = initialState,
+  action: Action
+): TGetYoutubeVideosDataState => {
   switch (action.type) {
     case getType(getYoutubeVideosStarted):
       return {
@@ -56,6 +60,14 @@ export const getYoutubeVideos = (state = initialState, action: Action): any => {
             : youtubeVideo
         ),
       };
+    case DELETE_SINGLE_YT_VIDEO:
+      return {
+        ...state,
+        youtubeVideos: state.youtubeVideos.filter(
+          (arrItem) => arrItem.date !== action.payload.movie.date
+        ),
+      };
+
     case CLEAR_YT_VIDEOS_DATA:
       return {
         ...state,

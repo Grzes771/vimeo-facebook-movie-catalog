@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Button, Form, Label, Input, FormGroup } from 'reactstrap';
 
-import { getVimeoVideosStarted } from '../../store/getSingleVimeoVideo/actions';
-import { getYoutubeVideosStarted } from '../../store/getSingleYoutubeVideo/actions';
+import { getVimeoVideosStarted } from '../../store/getVimeoVideos/actions';
+import { getYoutubeVideosStarted } from '../../store/getYoutubeVideos/actions';
 import { getVideoId } from './helpers';
 
 import './style.css';

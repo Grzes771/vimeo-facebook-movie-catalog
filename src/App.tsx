@@ -1,6 +1,6 @@
 import { Col, Row } from 'reactstrap';
 
-import { Formular } from './modules/Form/Form';
+import { Formular } from './modules/Form';
 import { MainPanel } from './modules/MainPanel';
 import { MovieList } from './modules/Movies/movies-list';
 import { ModalShowVideo } from './modules/Modal';

@@ -5,6 +5,7 @@ import {
   SET_YT_FAVORITE,
   CLEAR_YT_VIDEOS_DATA,
   ADD_YT_DEMO_DATA,
+  DELETE_SINGLE_YT_VIDEO,
 } from './consts';
 
 type TGetYoutubeVideosStarted = {
@@ -28,3 +29,8 @@ export const clearYoutubeVideosData = createAction(
 )();
 
 export const addYoutubeDemoData = createAction(ADD_YT_DEMO_DATA, () => ({}))();
+
+export const deleteSingleYoutubeVideo = createAction(
+  DELETE_SINGLE_YT_VIDEO,
+  (movie) => ({ movie })
+)();
