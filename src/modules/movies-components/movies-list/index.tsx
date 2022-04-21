@@ -1,22 +1,22 @@
 import React, { Dispatch, SetStateAction } from 'react';
-import { SingleMovie } from './single-video';
+import { SingleMovie } from '../single-video';
 import { useSelector } from 'react-redux';
 import BlockUi from 'react-block-ui';
-import { setInputDataRX } from '../../store/change-panel-values/selector';
+import { setInputDataRX } from '../../../store/change-panel-values/selector';
 import {
   youtubeVideoIsLoadingRX,
   youtubeVideosDataRX,
-} from '../../store/get-youtube-videos/selectors';
+} from '../../../store/get-youtube-videos/selectors';
 import {
   vimeoVideoIsLoadingRX,
   vimeoVideosDataRX,
-} from '../../store/get-vimeo-videos/selectors';
-import { favVideo, getLocalStorage } from '../../helpers/local-storage';
-import { TVideosArrItem } from '../../store/types/movie-item';
+} from '../../../store/get-vimeo-videos/selectors';
+import { favVideo, getLocalStorage } from '../../../helpers/local-storage';
+import { TVideosArrItem } from '../../../store/types/movie-item';
 
 import './style.css';
 import 'react-block-ui/style.css';
-import { Nav } from '../nav/index';
+import { ListPagination } from '../../list-pagination/index';
 
 type TProps = {
   currentPage: number;
@@ -67,7 +67,7 @@ export const MovieList = (props: TProps) => {
       <BlockUi tag="div" blocking={isYoutubeLoading || isVimeoLoading}>
         <div className="movies-container">{displayAllMovies}</div>
         {currentVideos.length < 5 ? null : (
-          <Nav
+          <ListPagination
             filterAndSort={sortMovies(currentVideos)}
             filterAndSortFavorite={sortMovies(favVideos ?? [])}
             setCurrentPage={setCurrentPage}

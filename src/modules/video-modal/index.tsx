@@ -20,7 +20,7 @@ const youTubeOptions = {
   },
 };
 
-const ModalInnerVideo: React.FC = () => {
+const VideoModal = () => {
   const dispatch = useDispatch();
 
   const singleModalVideoData = useSelector(singleModalVideosDataRX);
@@ -80,4 +80,4 @@ const ModalInnerVideo: React.FC = () => {
 };
 
 export const ModalShowVideo = () =>
-  ReactDOM.createPortal(<ModalInnerVideo />, document.getElementById('root')!);
+  ReactDOM.createPortal(<VideoModal />, document.getElementById('root')!);

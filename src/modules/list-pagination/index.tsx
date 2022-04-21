@@ -7,14 +7,14 @@ import { TVideosArrItem } from '../../store/types/movie-item';
 
 import './style.css';
 
-type Props = {
+type TProps = {
   filterAndSort: TVideosArrItem[];
   filterAndSortFavorite: TVideosArrItem[] | undefined;
   setCurrentPage: Dispatch<SetStateAction<number>>;
   currentPage: number;
 };
 
-export const Nav: React.FC<Props> = (props) => {
+export const ListPagination = (props: TProps) => {
   const { filterAndSort, filterAndSortFavorite, setCurrentPage, currentPage } =
     props;
   const showDisplayInputStoreValue = useSelector(setInputDataRX);

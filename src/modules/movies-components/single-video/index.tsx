@@ -9,18 +9,18 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { setInputDataRX } from '../../store/change-panel-values/selector';
-import { addItemToLS, removeItemFromLS } from '../../helpers/local-storage';
+import { setInputDataRX } from '../../../store/change-panel-values/selector';
+import { addItemToLS, removeItemFromLS } from '../../../helpers/local-storage';
 import {
   deleteSingleYoutubeVideo,
   setYtFavorite,
-} from '../../store/get-youtube-videos/actions';
-import { TVideosArrItem } from '../../store/types/movie-item';
+} from '../../../store/get-youtube-videos/actions';
+import { TVideosArrItem } from '../../../store/types/movie-item';
 import {
   deleteSingleVimeoVideo,
   setVimeoFavorite,
-} from '../../store/get-vimeo-videos/actions';
-import { setModalActive, setVideoDetails } from '../../store/modal/actions';
+} from '../../../store/get-vimeo-videos/actions';
+import { setModalActive, setVideoDetails } from '../../../store/modal/actions';
 
 import {
   faClock,

@@ -3,8 +3,8 @@ import { Col, Row } from 'reactstrap';
 
 import { SearchForm } from './modules/search-form';
 import { MainPanel } from './modules/main-panel';
-import { MovieList } from './modules/movies/movies-list';
-import { ModalShowVideo } from './modules/modal';
+import { MovieList } from './modules/movies-components/movies-list';
+import { ModalShowVideo } from './modules/video-modal';
 
 import './App.css';
 import 'react-toastify/dist/ReactToastify.css';
