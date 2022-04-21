@@ -91,10 +91,12 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
         />
       </CardBody>
       <CardFooter className="text-muted">
-        <span>
-          <FontAwesomeIcon icon={faEye} />
-          {` ${movie.viewsCount}`}
-        </span>
+        {movie.viewsCount && (
+          <span>
+            <FontAwesomeIcon icon={faEye} />
+            {` ${movie.viewsCount}`}
+          </span>
+        )}
         {movie.likes && (
           <span>
             <FontAwesomeIcon icon={faThumbsUp} />

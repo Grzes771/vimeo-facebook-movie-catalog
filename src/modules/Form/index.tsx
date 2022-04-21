@@ -14,9 +14,12 @@ export const Formular = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const videoId = getVideoId(link);
-    dispatch(getYoutubeVideosStarted(videoId));
-    dispatch(getVimeoVideosStarted(link));
+    if (link.includes('vimeo')) {
+      dispatch(getVimeoVideosStarted(link));
+    } else {
+      const videoId = getVideoId(link);
+      dispatch(getYoutubeVideosStarted(videoId));
+    }
   };
 
   return (

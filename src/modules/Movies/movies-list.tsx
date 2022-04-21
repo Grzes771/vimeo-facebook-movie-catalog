@@ -47,28 +47,33 @@ export const MovieList = (props: TProps) => {
     showInputValues.favorite === 'favorite'
       ? sortMovies(favVideos ?? [])
           ?.slice(currentPage * pageSize, (currentPage + 1) * pageSize)
-          .map((movie: TVideosArrItem) => <SingleMovie movie={movie} />)
+          .map((movie: TVideosArrItem) => (
+            <SingleMovie key={movie.path} movie={movie} />
+          ))
       : null;
 
-  const displayYoutubeMovies =
+  const displayAllMovies =
     showInputValues.favorite === 'all'
       ? sortMovies(currentVideos)
           .slice(currentPage * pageSize, (currentPage + 1) * pageSize)
-          .map((movie) => <SingleMovie movie={movie} />)
+          .map((movie) => <SingleMovie key={movie.path} movie={movie} />)
       : displayFavoriteVideos;
 
   const isYoutubeLoading = useSelector(youtubeVideoIsLoadingRX);
   const isVimeoLoading = useSelector(vimeoVideoIsLoadingRX);
+
   return (
     <div>
       <BlockUi tag="div" blocking={isYoutubeLoading || isVimeoLoading}>
-        <div className="movies-container">{displayYoutubeMovies}</div>
-        <Nav
-          filterAndSort={sortMovies(currentVideos)}
-          filterAndSortFavorite={sortMovies(favVideos ?? [])}
-          setCurrentPage={setCurrentPage}
-          currentPage={currentPage}
-        />
+        <div className="movies-container">{displayAllMovies}</div>
+        {currentVideos.length < 5 ? null : (
+          <Nav
+            filterAndSort={sortMovies(currentVideos)}
+            filterAndSortFavorite={sortMovies(favVideos ?? [])}
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
+        )}
       </BlockUi>
     </div>
   );

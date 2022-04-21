@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Col, Row } from 'reactstrap';
 
 import { Formular } from './modules/form';
@@ -6,7 +7,7 @@ import { MovieList } from './modules/movies/movies-list';
 import { ModalShowVideo } from './modules/modal';
 
 import './App.css';
-import { useState } from 'react';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
   const [currentPage, setCurrentPage] = useState(0);
