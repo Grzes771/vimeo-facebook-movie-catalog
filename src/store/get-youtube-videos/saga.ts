@@ -2,7 +2,7 @@ import { SagaIterator } from 'redux-saga';
 import { getType } from 'typesafe-actions';
 import { call, put, takeLatest } from 'redux-saga/effects';
 
-import { getYoutubeData } from './../../common/axios/youtube-api';
+import { getYoutubeData } from '../../common/axios/youtube-api';
 
 import { getYoutubeVideosStarted } from './actions';
 import * as C from './consts';
