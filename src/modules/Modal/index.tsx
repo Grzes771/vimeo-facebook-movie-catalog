@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import { Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'reactstrap';
 import YouTube, { YouTubeProps } from 'react-youtube';
 import Vimeo from '@u-wave/react-vimeo';
@@ -9,7 +9,7 @@ import {
   modalIsOpenRX,
   singleModalVideosDataRX,
 } from '../../store/modal/selectors';
-import { setModalActiveStarted } from '../../store/modal/actions';
+import { setModalActive } from '../../store/modal/actions';
 import './style.css';
 
 const youTubeOptions = {
@@ -36,7 +36,7 @@ const ModalInnerVideo: React.FC = () => {
     event.target.pauseVideo();
   };
   const handleCloseModal = () => {
-    dispatch(setModalActiveStarted(false));
+    dispatch(setModalActive(false));
   };
   return (
     <Modal

@@ -1,26 +1,34 @@
 import { Col, Row } from 'reactstrap';
 
-import { Formular } from './modules/Form';
-import { MainPanel } from './modules/MainPanel';
-import { MovieList } from './modules/Movies/movies-list';
-import { ModalShowVideo } from './modules/Modal';
+import { Formular } from './modules/form';
+import { MainPanel } from './modules/main-panel';
+import { MovieList } from './modules/movies/movies-list';
+import { ModalShowVideo } from './modules/modal';
 
 import './App.css';
-function App() {
+import { useState } from 'react';
+
+export const App = () => {
+  const [currentPage, setCurrentPage] = useState(0);
   return (
     <div className="App">
       <Formular />
       <Row>
         <Col md="2">
-          <MainPanel />
+          <MainPanel
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </Col>
         <Col md="10">
-          <MovieList />
+          <MovieList
+            setCurrentPage={setCurrentPage}
+            currentPage={currentPage}
+          />
         </Col>
       </Row>
       <ModalShowVideo />
     </div>
   );
-}
-
+};
 export default App;

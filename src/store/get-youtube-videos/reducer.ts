@@ -5,10 +5,10 @@ import { TVideosArrItem } from '../types/movie-item';
 import { getYoutubeVideosStarted } from './actions';
 import {
   GET_YOUTUBE_VIDEOS_DATA,
-  SET_YT_FAVORITE,
-  CLEAR_YT_VIDEOS_DATA,
-  ADD_YT_DEMO_DATA,
-  DELETE_SINGLE_YT_VIDEO,
+  SET_YOUTUBE_FAVORITE,
+  CLEAR_YOUTUBE_VIDEOS_DATA,
+  ADD_YOUTUBE_DEMO_DATA,
+  DELETE_SINGLE_YOUTUBE_VIDEO,
 } from './consts';
 
 export type TGetYoutubeVideosDataState = {
@@ -51,7 +51,7 @@ export const getYoutubeVideos = (
         isLoading: initialState.isLoading,
         isError: action.payload.error,
       };
-    case SET_YT_FAVORITE:
+    case SET_YOUTUBE_FAVORITE:
       return {
         ...state,
         youtubeVideos: state.youtubeVideos.map((youtubeVideo) =>
@@ -60,7 +60,7 @@ export const getYoutubeVideos = (
             : youtubeVideo
         ),
       };
-    case DELETE_SINGLE_YT_VIDEO:
+    case DELETE_SINGLE_YOUTUBE_VIDEO:
       return {
         ...state,
         youtubeVideos: state.youtubeVideos.filter(
@@ -68,12 +68,12 @@ export const getYoutubeVideos = (
         ),
       };
 
-    case CLEAR_YT_VIDEOS_DATA:
+    case CLEAR_YOUTUBE_VIDEOS_DATA:
       return {
         ...state,
         youtubeVideos: [],
       };
-    case ADD_YT_DEMO_DATA:
+    case ADD_YOUTUBE_DEMO_DATA:
       return {
         ...state,
         youtubeVideos: youtubeDemo,

@@ -1,6 +1,5 @@
 import { AppState } from '../../store/reducers';
 import { TVideosArrItem } from '../types/movie-item';
-import { TVideoModalDataState } from './reducer';
 
 export const singleModalVideosDataRX = (
   state: AppState
