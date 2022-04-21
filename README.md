@@ -35,7 +35,7 @@ $ npm start
 
 ## Technologies
 
-Project is created with:
+This project is created with:
 
 - [ReactJS](https://pl.reactjs.org/)
 - [Reactstrap](https://reactstrap.github.io/)
