@@ -9,13 +9,9 @@ import {
   DELETE_SINGLE_YOUTUBE_VIDEO,
 } from './consts';
 
-type TGetYoutubeVideosStarted = {
-  url: string;
-};
-
 export const getYoutubeVideosStarted = createAction(
   GET_YOUTUBE_VIDEOS_DATA.started,
-  (url): TGetYoutubeVideosStarted => ({
+  (url: string | undefined) => ({
     url,
   })
 )();

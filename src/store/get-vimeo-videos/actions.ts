@@ -9,13 +9,9 @@ import {
   DELETE_SINGLE_VIMEO_VIDEO,
 } from './consts';
 
-type TGetVimeoVideosStarted = {
-  url: string;
-};
-
 export const getVimeoVideosStarted = createAction(
   GET_VIMEO_VIDEOS_DATA.started,
-  (url): TGetVimeoVideosStarted => ({
+  (url: string) => ({
     url,
   })
 )();
