@@ -1,6 +1,6 @@
-import { TVideosArrItem } from '../../store/types/movie-item';
+import { TVideosArrItem } from 'store/types/movie-item';
 
-const vimeoDemo: TVideosArrItem[] = [
+export const VIMEO_DEMO: readonly TVideosArrItem[] = Object.freeze([
   {
     date: 1650534232644,
     favorite: false,
@@ -23,6 +23,4 @@ const vimeoDemo: TVideosArrItem[] = [
     title: 'Every Other Week',
     viewsCount: 4325,
   },
-];
-
-export { vimeoDemo };
+]);

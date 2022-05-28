@@ -7,12 +7,12 @@ import {
 } from './actions';
 
 export type TSelectActionState = {
-  display: 'vertical' | 'horizontal';
+  display: 'tiles' | 'list';
   favorite: 'all' | 'favorite';
   orderBy: 'newest' | 'oldest';
 };
 export const initialState: TSelectActionState = {
-  display: 'vertical',
+  display: 'tiles',
   favorite: 'all',
   orderBy: 'newest',
 };

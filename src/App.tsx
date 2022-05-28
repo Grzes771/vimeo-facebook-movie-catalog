@@ -1,34 +1,33 @@
-import { useState } from 'react';
-import { Col, Row } from 'reactstrap';
+import { useSelector } from 'react-redux';
 
-import { SearchForm } from './modules/search-form';
-import { MainPanel } from './modules/main-panel';
-import { MovieList } from './modules/movies-components/movies-list';
-import { ModalShowVideo } from './modules/video-modal';
+import { SearchForm } from 'modules/search-form';
+import { MovieList } from 'modules/movies-list';
+import { ModalShowVideo } from 'modules/video-modal';
+import { FavoritePanel } from 'modules/favorite-panel';
+import { MainPanelView } from 'modules/navbar';
 
-import './App.css';
+import { VideosListContextProvider } from 'contexts/video-list-context';
+
+import { modalIsOpenRX } from 'store/modal/selectors';
+
 import 'react-toastify/dist/ReactToastify.css';
 
+import { AppStyle } from './index.styles';
+
 export const App = () => {
-  const [currentPage, setCurrentPage] = useState(0);
+  const isModalOpenedData = useSelector(modalIsOpenRX);
+
   return (
-    <div className="App">
-      <SearchForm />
-      <Row>
-        <Col md="2">
-          <MainPanel
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-          />
-        </Col>
-        <Col md="10">
-          <MovieList
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-          />
-        </Col>
-      </Row>
-      <ModalShowVideo />
+    <div>
+      <AppStyle isModalOpen={isModalOpenedData}>
+        <VideosListContextProvider>
+          <FavoritePanel />
+          <SearchForm />
+          <MainPanelView />
+          <MovieList />
+        </VideosListContextProvider>
+        <ModalShowVideo />
+      </AppStyle>
     </div>
   );
 };

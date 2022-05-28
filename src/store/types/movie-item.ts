@@ -7,4 +7,4 @@ export type TVideosArrItem = {
   favorite: boolean;
   date: number;
   platform: string;
-}
+};

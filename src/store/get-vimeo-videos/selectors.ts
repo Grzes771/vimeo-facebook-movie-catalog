@@ -1,8 +1,7 @@
 import { AppState } from '../reducers';
-import { TVideosArrItem } from '../types/movie-item';
 
-export const vimeoVideosDataRX = (state: AppState): TVideosArrItem[] =>
-  state.getVimeoVideos.vimeoVideos;
-
-export const vimeoVideoIsLoadingRX = (state: AppState): boolean =>
+export const addVimeoVideoIsLoadingRX = (state: AppState): boolean =>
   state.getVimeoVideos.isLoading;
+
+export const addVimeoVideoIsSuccessRX = (state: AppState): boolean =>
+  state.getVimeoVideos.isSuccess;

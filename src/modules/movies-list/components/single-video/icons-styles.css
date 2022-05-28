@@ -57,6 +57,7 @@
 
 .fa-star:hover {
   cursor: pointer;
+  color: purple;
 }
 
 .active-star {

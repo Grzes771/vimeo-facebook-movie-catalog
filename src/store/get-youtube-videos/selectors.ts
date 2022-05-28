@@ -1,8 +1,7 @@
 import { AppState } from '../reducers';
-import { TVideosArrItem } from '../types/movie-item';
 
-export const youtubeVideosDataRX = (state: AppState): TVideosArrItem[] =>
-  state.getYoutubeVideos.youtubeVideos;
-
-export const youtubeVideoIsLoadingRX = (state: AppState): boolean =>
+export const addYoutubeVideoIsLoadingRX = (state: AppState): boolean =>
   state.getYoutubeVideos.isLoading;
+
+export const addYoutubeVideoIsSuccessRX = (state: AppState): boolean =>
+  state.getYoutubeVideos.isSuccess;

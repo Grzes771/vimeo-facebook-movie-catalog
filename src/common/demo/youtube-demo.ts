@@ -1,6 +1,6 @@
-import { TVideosArrItem } from '../../store/types/movie-item';
+import { TVideosArrItem } from 'store/types/movie-item';
 
-export const youtubeDemo: TVideosArrItem[] = [
+export const YOUTUBE_DEMO: readonly TVideosArrItem[] = Object.freeze([
   {
     date: 1650387611752,
     platform: 'youtube',
@@ -51,4 +51,4 @@ export const youtubeDemo: TVideosArrItem[] = [
     title: 'CZAQU - Zdumiony',
     viewsCount: 2192,
   },
-];
+]);

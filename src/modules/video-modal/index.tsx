@@ -1,16 +1,14 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalFooter, ModalBody, Button } from 'reactstrap';
 import YouTube, { YouTubeProps } from 'react-youtube';
 import Vimeo from '@u-wave/react-vimeo';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  modalIsOpenRX,
-  singleModalVideosDataRX,
-} from '../../store/modal/selectors';
-import { setModalActive } from '../../store/modal/actions';
+import { modalIsOpenRX, singleModalVideosDataRX } from 'store/modal/selectors';
+import { setModalActive } from 'store/modal/actions';
+
 import './style.css';
+import * as S from './index.styles';
 
 const youTubeOptions = {
   height: '450px',
@@ -20,9 +18,8 @@ const youTubeOptions = {
   },
 };
 
-const VideoModal = () => {
+export const VideoModal = () => {
   const dispatch = useDispatch();
-
   const singleModalVideoData = useSelector(singleModalVideosDataRX);
   const singleModalVideo = {
     title: singleModalVideoData?.title,
@@ -38,44 +35,47 @@ const VideoModal = () => {
   const handleCloseModal = () => {
     dispatch(setModalActive(false));
   };
+
   return (
-    <Modal
-      data-testid="modal"
-      className="modal-dialog modal-lg"
-      isOpen={isModalOpenedData}
-      modalTransition={{ timeout: 200 }}
-      backdropTransition={{ timeout: 200 }}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}
     >
-      <ModalHeader>{singleModalVideo.title}</ModalHeader>
-      <ModalBody>
-        {singleModalVideo.platform === 'youtube' ? (
-          <YouTube
-            videoId={singleModalVideo.url}
-            opts={youTubeOptions}
-            onReady={onReady}
-          />
-        ) : (
-          //@ts-ignore
-          <Vimeo
-            //@ts-ignore
-            video={singleModalVideo.url}
-            autoplay
-            width="300px"
-            responsive
-          />
-        )}
-      </ModalBody>
-      <ModalFooter>
-        <Button
-          color="secondary"
-          type="submit"
-          aria-label="modal"
-          onClick={handleCloseModal}
-        >
-          close
-        </Button>
-      </ModalFooter>
-    </Modal>
+      {isModalOpenedData && (
+        <S.ModalStyle data-testid="modal">
+          <S.ModalHeaderStyle>{singleModalVideo.title}</S.ModalHeaderStyle>
+          <S.ModalBodyStyle>
+            {singleModalVideo.platform === 'youtube' ? (
+              <YouTube
+                videoId={singleModalVideo.url}
+                opts={youTubeOptions}
+                onReady={onReady}
+              />
+            ) : (
+              //@ts-ignore
+              <Vimeo
+                video={singleModalVideo.url ?? ''}
+                autoplay
+                width="300px"
+                responsive
+              />
+            )}
+          </S.ModalBodyStyle>
+          <S.ModalFooterStyle>
+            <S.Button
+              color="secondary"
+              type="submit"
+              aria-label="modal"
+              onClick={handleCloseModal}
+            >
+              close
+            </S.Button>
+          </S.ModalFooterStyle>
+        </S.ModalStyle>
+      )}
+    </div>
   );
 };
 

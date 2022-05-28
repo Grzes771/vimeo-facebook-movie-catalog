@@ -1,22 +1,23 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Pagination, PaginationItem, PaginationLink } from 'reactstrap';
 
-import { setInputDataRX } from '../../store/change-panel-values/selector';
-import { TVideosArrItem } from '../../store/types/movie-item';
+import { setInputDataRX } from 'store/change-panel-values/selector';
+import { TVideosArrItem } from 'store/types/movie-item';
+import { useVideosListContext } from 'contexts/video-list-context';
 
-import './style.css';
+import { PaginationWrapper, StyledListItem, ButtonStyle } from './index.styles';
 
 type TProps = {
   filterAndSort: TVideosArrItem[];
   filterAndSortFavorite: TVideosArrItem[] | undefined;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
-  currentPage: number;
 };
 
-export const ListPagination = (props: TProps) => {
-  const { filterAndSort, filterAndSortFavorite, setCurrentPage, currentPage } =
-    props;
+export const ListPagination = ({
+  filterAndSort,
+  filterAndSortFavorite,
+}: TProps) => {
+  const { currentPage, setCurrentPage } = useVideosListContext();
+
   const showDisplayInputStoreValue = useSelector(setInputDataRX);
   const showInputValues = {
     favorite: showDisplayInputStoreValue.favorite,
@@ -24,15 +25,15 @@ export const ListPagination = (props: TProps) => {
 
   const pagesCount =
     showInputValues.favorite === 'favorite'
-      ? Math.ceil(filterAndSortFavorite!.length / 4)
-      : Math.ceil(filterAndSort.length / 4);
+      ? Math.ceil(filterAndSortFavorite!.length / 12)
+      : Math.ceil(filterAndSort?.length / 12);
 
   useEffect(() => {
     setCurrentPage(currentPage);
   }, [currentPage, setCurrentPage]);
 
   const handleClick = (
-    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    e: React.MouseEvent<HTMLElement, MouseEvent>,
     index: number
   ) => {
     e.preventDefault();
@@ -40,59 +41,52 @@ export const ListPagination = (props: TProps) => {
   };
 
   return (
-    <div className="pagination-wrapper">
-      <Pagination aria-label="Page navigation example">
-        <PaginationItem>
-          <PaginationLink
+    <div>
+      <PaginationWrapper aria-label="Page navigation example">
+        <StyledListItem isActive={currentPage > 0}>
+          <ButtonStyle
             onClick={(e) => handleClick(e, 0)}
-            previous
-            href="#"
             data-testid="pagination-link"
-          />
-        </PaginationItem>
-        <PaginationItem disabled={currentPage <= 0}>
-          <PaginationLink
-            onClick={(e) => handleClick(e, currentPage - 1)}
-            previous
-            href="#"
-            data-testid="pagination-link"
-          />
-        </PaginationItem>
-        {[...Array(pagesCount)].map((video, i) => (
-          <PaginationItem
-            active={i === currentPage}
-            key={
-              showInputValues.favorite === 'favorite'
-                ? filterAndSortFavorite![i].date
-                : filterAndSort[i].date
-            }
           >
-            <PaginationLink
+            &laquo;
+          </ButtonStyle>
+        </StyledListItem>
+        <StyledListItem isActive={currentPage > 0}>
+          <ButtonStyle
+            onClick={(e) => handleClick(e, currentPage - 1)}
+            data-testid="pagination-link"
+          >
+            &#8249;
+          </ButtonStyle>
+        </StyledListItem>
+        {[...Array(pagesCount)].map((video, i) => (
+          <StyledListItem isActive={true} key={i}>
+            <ButtonStyle
               onClick={(e) => handleClick(e, i)}
-              href="#"
               data-testid="pagination-link"
+              backgroundActive={currentPage === i}
             >
               {i + 1}
-            </PaginationLink>
-          </PaginationItem>
+            </ButtonStyle>
+          </StyledListItem>
         ))}
-        <PaginationItem disabled={currentPage >= pagesCount - 1}>
-          <PaginationLink
+        <StyledListItem isActive={currentPage < pagesCount - 1}>
+          <ButtonStyle
             data-testid="pagination-link"
             onClick={(e) => handleClick(e, currentPage + 1)}
-            next
-            href="#"
-          />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
+          >
+            &#8250;
+          </ButtonStyle>
+        </StyledListItem>
+        <StyledListItem isActive={currentPage < pagesCount - 1}>
+          <ButtonStyle
             data-testid="pagination-link"
             onClick={(e) => handleClick(e, pagesCount - 1)}
-            next
-            href="#"
-          />
-        </PaginationItem>
-      </Pagination>
+          >
+            &raquo;
+          </ButtonStyle>
+        </StyledListItem>
+      </PaginationWrapper>
     </div>
   );
 };

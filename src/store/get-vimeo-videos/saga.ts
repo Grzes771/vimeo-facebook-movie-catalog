@@ -4,12 +4,16 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import { toast } from 'react-toastify';
 
 import { getVimeoData } from '../../common/axios/vimeo-api';
-
+import {
+  getLocalStorage,
+  FAV_VIDEOS,
+  addItemToLS,
+} from '../../helpers/local-storage';
 import { getVimeoVideosStarted } from './actions';
-import * as C from './consts';
-import { getLocalStorage, favVideo } from '../../helpers/local-storage';
-
 import { TVideosArrItem } from '../types/movie-item';
+
+import * as C from './consts';
+import { StringLiteral } from 'typescript';
 
 toast.configure();
 
@@ -24,35 +28,59 @@ export function* getSingleVimeoVideo({
       toast.error('Video not found');
       yield put({
         type: C.GET_VIMEO_VIDEOS_DATA.success,
-        payload: [],
       });
     }
 
-    const favVideos = getLocalStorage(favVideo);
+    const favVideos = getLocalStorage(FAV_VIDEOS);
     const favVideosIds = (favVideos ?? []).map(
       (video: TVideosArrItem) => video.path
     );
+    type TParsedVimeoVideoArrItem = {
+      name: string;
+      link: string;
+      metadata: {
+        connections: {
+          likes: {
+            total: StringLiteral;
+          };
+        };
+      };
+      stats: {
+        plays: string;
+      };
+      pictures: {
+        sizes: any;
+      };
+    };
+    const parsedVimeoVideos = request.data.data.map(
+      (arrItem: TParsedVimeoVideoArrItem) => ({
+        path: arrItem?.link,
+        viewsCount: arrItem?.stats.plays,
+        title: arrItem?.name,
+        thumbNails: arrItem?.pictures.sizes[4].link,
+        likes: arrItem?.metadata.connections.likes.total,
+        favorite: favVideosIds.includes(arrItem.link),
+        date: Date.now(),
+        platform: 'vimeo',
+      })
+    );
 
-    const parsedVimeoVideos = request.data.data.map((arrItem: any) => ({
-      path: arrItem?.link,
-      viewsCount: arrItem?.stats.plays,
-      title: arrItem?.name,
-      thumbNails: arrItem?.pictures.sizes[4].link,
-      likes: arrItem?.metadata.connections.likes.total,
-      favorite: favVideosIds.includes(arrItem.link),
-      date: Date.now(),
-      platform: 'vimeo',
-    }));
+    const isAlreadyAdded = getLocalStorage(FAV_VIDEOS)?.some(
+      (video: TVideosArrItem) => video.path === payload.url
+    );
+
+    if (!isAlreadyAdded && !!parsedVimeoVideos[0])
+      addItemToLS(parsedVimeoVideos[0]);
+    if (isAlreadyAdded) toast.error('Video is already added');
 
     yield put({
       type: C.GET_VIMEO_VIDEOS_DATA.success,
-      payload: parsedVimeoVideos,
     });
   } catch (e) {
     toast.error('Something went wrong');
+
     yield put({
       type: C.GET_VIMEO_VIDEOS_DATA.failure,
-      payload: { error: 'Something went wrong' },
     });
   }
 }

@@ -1,8 +1,8 @@
 import { TVideosArrItem } from '../store/types/movie-item';
 
-export const favVideo = 'favVideos';
+export const FAV_VIDEOS = 'favVideos';
 
-export const setLocalStorage = (key: string, value: any) => {
+export const setLocalStorage = (key: string, value: Array<TVideosArrItem>) => {
   if (typeof window !== 'undefined') {
     localStorage.setItem(key, JSON.stringify(value));
   }
@@ -15,18 +15,27 @@ export const getLocalStorage = (key: string) => {
 };
 
 export const addItemToLS = (movie: TVideosArrItem) => {
-  const newItem = { ...movie, favorite: true };
-  const getItems = localStorage.getItem(favVideo);
-  let moviesArr = getItems ? JSON.parse(getItems) : [];
-  moviesArr.push(newItem);
-  setLocalStorage(favVideo, moviesArr);
+  const getItems = localStorage.getItem(FAV_VIDEOS);
+
+  if (!getItems) {
+    const newArr = [movie];
+    setLocalStorage(FAV_VIDEOS, newArr);
+    return;
+  }
+  const moviesArr = JSON.parse(getItems);
+  moviesArr.push(movie);
+  setLocalStorage(FAV_VIDEOS, moviesArr);
 };
 
 export const removeItemFromLS = (movie: TVideosArrItem) => {
-  const getItems = localStorage.getItem(favVideo);
+  const getItems = localStorage.getItem(FAV_VIDEOS);
   let moviesArr = getItems ? JSON.parse(getItems) : [];
   const newMoviesArr = moviesArr.filter(
     (basketItem: TVideosArrItem) => basketItem.path !== movie.path
   );
-  setLocalStorage(favVideo, newMoviesArr);
+  setLocalStorage(FAV_VIDEOS, newMoviesArr);
+};
+
+export const deleteItemFromLS = (key: string) => {
+  localStorage.removeItem(key);
 };

@@ -1,26 +1,17 @@
 import { getType } from 'typesafe-actions';
-import { youtubeDemo } from '../../common/demo/youtube-demo';
 import { Action } from '../types/actions';
-import { TVideosArrItem } from '../types/movie-item';
 import { getYoutubeVideosStarted } from './actions';
-import {
-  GET_YOUTUBE_VIDEOS_DATA,
-  SET_YOUTUBE_FAVORITE,
-  CLEAR_YOUTUBE_VIDEOS_DATA,
-  ADD_YOUTUBE_DEMO_DATA,
-  DELETE_SINGLE_YOUTUBE_VIDEO,
-} from './consts';
+
+import { GET_YOUTUBE_VIDEOS_DATA } from './consts';
 
 export type TGetYoutubeVideosDataState = {
   isLoading: boolean;
-  isError: string;
-  youtubeVideos: TVideosArrItem[];
+  isSuccess: boolean;
 };
 
 export const initialState: TGetYoutubeVideosDataState = {
   isLoading: false,
-  isError: '',
-  youtubeVideos: [],
+  isSuccess: false,
 };
 
 export const getYoutubeVideos = (
@@ -32,52 +23,22 @@ export const getYoutubeVideos = (
       return {
         ...state,
         isLoading: true,
-        isError: initialState.isError,
+        isSuccess: false,
       };
     case GET_YOUTUBE_VIDEOS_DATA.success:
       return {
         ...state,
         isLoading: false,
-        isError: initialState.isError,
-        youtubeVideos: state.youtubeVideos.some(
-          (youtubeVideo) => youtubeVideo.path === action.payload[0].path
-        )
-          ? state.youtubeVideos
-          : [...state.youtubeVideos, ...action.payload],
+        isSuccess: true,
       };
+
     case GET_YOUTUBE_VIDEOS_DATA.failure:
       return {
         ...state,
-        isLoading: initialState.isLoading,
-        isError: action.payload.error,
-      };
-    case SET_YOUTUBE_FAVORITE:
-      return {
-        ...state,
-        youtubeVideos: state.youtubeVideos.map((youtubeVideo) =>
-          youtubeVideo.path === action.payload.url
-            ? { ...youtubeVideo, favorite: !youtubeVideo.favorite }
-            : youtubeVideo
-        ),
-      };
-    case DELETE_SINGLE_YOUTUBE_VIDEO:
-      return {
-        ...state,
-        youtubeVideos: state.youtubeVideos.filter(
-          (arrItem) => arrItem.date !== action.payload.movie.date
-        ),
+        isLoading: false,
+        isSuccess: false,
       };
 
-    case CLEAR_YOUTUBE_VIDEOS_DATA:
-      return {
-        ...state,
-        youtubeVideos: [],
-      };
-    case ADD_YOUTUBE_DEMO_DATA:
-      return {
-        ...state,
-        youtubeVideos: youtubeDemo,
-      };
     default:
       return { ...state };
   }

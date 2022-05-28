@@ -11,7 +11,7 @@ export const getVimeoData = (url: string) =>
   vimeoInstance
     .get('/', {
       params: {
-            links: url,
+        links: url,
       },
     })
     .then((res) => res)

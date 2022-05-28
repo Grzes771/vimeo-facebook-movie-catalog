@@ -3,7 +3,6 @@ import { TVideosArrItem } from '../types/movie-item';
 
 import {
   GET_YOUTUBE_VIDEOS_DATA,
-  SET_YOUTUBE_FAVORITE,
   CLEAR_YOUTUBE_VIDEOS_DATA,
   ADD_YOUTUBE_DEMO_DATA,
   DELETE_SINGLE_YOUTUBE_VIDEO,
@@ -12,13 +11,6 @@ import {
 export const getYoutubeVideosStarted = createAction(
   GET_YOUTUBE_VIDEOS_DATA.started,
   (url: string | undefined) => ({
-    url,
-  })
-)();
-
-export const setYtFavorite = createAction(
-  SET_YOUTUBE_FAVORITE,
-  (url: string) => ({
     url,
   })
 )();
