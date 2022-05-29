@@ -33,12 +33,11 @@ export const SingleCardStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
           align-items: center;
           width: 45%;
           height: 100px;
-          margin: 0px 5% 50px 0px;
+          margin: 0px auto 30px auto;
           background-color: rgba(0, 0, 0, 0.03);
           border: 1px solid rgba(0, 0, 0, 0.125);
-          transition: 0.2s;
 
-          @media (max-width: 640px) {
+          @media (max-width: 760px) {
             width: 90%;
           }
         `;

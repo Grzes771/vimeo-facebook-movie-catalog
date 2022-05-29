@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const FormStyle = styled.form`
+export const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@ export const FormStyle = styled.form`
   }
 `;
 
-export const ButtonStyle = styled.button`
+export const StyledButton = styled.button`
   border: none;
   width: 100px;
   height: 35px;

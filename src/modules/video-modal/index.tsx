@@ -35,12 +35,7 @@ export const VideoModal = ({ setModalIsOpen }: TModalShowVideo) => {
   }, [modalIsActive]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
+    <S.Container>
       {modalIsActive && (
         <S.ModalStyle data-testid="modal">
           <S.ModalHeaderStyle>{singleVideo?.title}</S.ModalHeaderStyle>
@@ -62,7 +57,7 @@ export const VideoModal = ({ setModalIsOpen }: TModalShowVideo) => {
             )}
           </S.ModalBodyStyle>
           <S.ModalFooterStyle>
-            <S.Button
+            <S.StyledButton
               color="secondary"
               type="submit"
               aria-label="modal"
@@ -72,11 +67,11 @@ export const VideoModal = ({ setModalIsOpen }: TModalShowVideo) => {
               }}
             >
               close
-            </S.Button>
+            </S.StyledButton>
           </S.ModalFooterStyle>
         </S.ModalStyle>
       )}
-    </div>
+    </S.Container>
   );
 };
 

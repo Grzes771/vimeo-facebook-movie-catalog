@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
 export const ModalStyle = styled.div<{ isModalOpen?: boolean }>`
   position: fixed;
   top: 150px;
@@ -16,7 +21,7 @@ export const ModalStyle = styled.div<{ isModalOpen?: boolean }>`
   border-radius: 1%;
 `;
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   border: none;
   display: inline-block;
   font-weight: 400;

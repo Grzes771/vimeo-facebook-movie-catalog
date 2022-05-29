@@ -6,10 +6,10 @@ export const MovieContainer = styled.div<{ displayType: EDisplayTypeKeys }>`
   display: flex;
   flex-direction: row;
   justify-content: ${({ displayType }) =>
-    displayType === EDisplayTypeKeys.TILES ? 'center' : 'flex-start'};
+    displayType === EDisplayTypeKeys.TILES ? 'center' : 'center'};
   align-items: center;
   margin: ${({ displayType }) =>
-    displayType === EDisplayTypeKeys.TILES ? 'auto' : '0px 0px 0px 5%'};
+    displayType === EDisplayTypeKeys.TILES ? 'auto' : '0px 5% 0px 5%'};
   flex-wrap: wrap;
 `;
 export const Container = styled.div`

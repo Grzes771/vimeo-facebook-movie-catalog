@@ -24,7 +24,7 @@ export const Label = styled.label`
 
 export const ButtonsContainer = styled.div``;
 
-export const Button = styled.button<{
+export const StyledButton = styled.button<{
   isActive: boolean | undefined;
   id?: string;
 }>`

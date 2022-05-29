@@ -11,13 +11,7 @@ import {
 
 import { EFavoriteVideosActions } from 'types/video-list-context-enums';
 
-import {
-  SingleCardStyle,
-  CardImageWrapper,
-  ContentWrapper,
-  CardHeaderStyle,
-  CardFooterStyle,
-} from './index.styles';
+import * as S from './index.styles';
 import './icons-styles.css';
 
 type TSingleMovie = {
@@ -38,8 +32,8 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
   };
 
   return (
-    <SingleCardStyle displayType={displayType} data-testid="card">
-      <CardImageWrapper
+    <S.SingleCardStyle displayType={displayType} data-testid="card">
+      <S.CardImageWrapper
         displayType={displayType}
         onClick={() => {
           setSingleVideo(movie);
@@ -47,12 +41,12 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
         }}
       >
         <img src={movie.thumbNails} alt="thumbnail" />
-      </CardImageWrapper>
-      <ContentWrapper displayType={displayType}>
-        <CardHeaderStyle displayType={displayType}>
+      </S.CardImageWrapper>
+      <S.ContentWrapper displayType={displayType}>
+        <S.CardHeaderStyle displayType={displayType}>
           <p>{movie.title}</p>
-        </CardHeaderStyle>
-        <CardFooterStyle displayType={displayType}>
+        </S.CardHeaderStyle>
+        <S.CardFooterStyle displayType={displayType}>
           <div>
             {movie.viewsCount && (
               <span>
@@ -90,8 +84,8 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
               />
             </span>
           </div>
-        </CardFooterStyle>
-      </ContentWrapper>
-    </SingleCardStyle>
+        </S.CardFooterStyle>
+      </S.ContentWrapper>
+    </S.SingleCardStyle>
   );
 };

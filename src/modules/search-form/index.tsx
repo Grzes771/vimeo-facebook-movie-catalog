@@ -8,8 +8,7 @@ import { getVideoId } from './helpers';
 
 import { EVideosPlatform } from 'types/video-list-context-enums';
 
-import { FormStyle } from './index.styles';
-import { ButtonStyle } from './index.styles';
+import * as S from './index.styles';
 import './style.css';
 
 export const SearchForm = () => {
@@ -30,7 +29,7 @@ export const SearchForm = () => {
 
   return (
     <>
-      <FormStyle onSubmit={handleSubmit}>
+      <S.StyledForm onSubmit={handleSubmit}>
         <div>
           <input
             name="link"
@@ -41,8 +40,8 @@ export const SearchForm = () => {
           />
           <span className="error-message"></span>
         </div>
-        <ButtonStyle color="success">Dodaj</ButtonStyle>
-      </FormStyle>
+        <S.StyledButton color="success">Dodaj</S.StyledButton>
+      </S.StyledForm>
     </>
   );
 };

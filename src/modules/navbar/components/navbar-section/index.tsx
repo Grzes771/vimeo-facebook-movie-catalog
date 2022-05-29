@@ -2,7 +2,7 @@ import React from 'react';
 
 import { TNavbarSection } from './types';
 
-import { Container, Button, ButtonsContainer, Label } from './index.styles';
+import * as S from './index.styles';
 
 export const NavbarSection = ({
   label,
@@ -14,26 +14,26 @@ export const NavbarSection = ({
   buttonOnClick,
 }: TNavbarSection) => {
   return (
-    <Container>
-      <Label>{label}:</Label>
-      <ButtonsContainer>
-        <Button
+    <S.Container>
+      <S.Label>{label}:</S.Label>
+      <S.ButtonsContainer>
+        <S.StyledButton
           id={idLeft}
           type="button"
           isActive={buttonIsActive(idLeft)}
           onClick={() => buttonOnClick(idLeft)}
         >
           {leftButtonLabel}
-        </Button>
-        <Button
+        </S.StyledButton>
+        <S.StyledButton
           id={idRight}
           type="button"
           isActive={buttonIsActive(idRight)}
           onClick={() => buttonOnClick(idRight)}
         >
           {rightButtonLabel}
-        </Button>
-      </ButtonsContainer>
-    </Container>
+        </S.StyledButton>
+      </S.ButtonsContainer>
+    </S.Container>
   );
 };

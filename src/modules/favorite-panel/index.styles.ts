@@ -1,4 +1,3 @@
-import { NONAME } from 'dns';
 import styled from 'styled-components';
 
 import { EVideosListTypeKeys } from 'types/video-list-context-enums';
@@ -40,7 +39,7 @@ export const StyledButton = styled.button<{
   border-radius: 0.25rem;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.3)) top/100% 800%;
   padding: 0.5rem 0.9rem;
-  transition: 0.5s;
+
   background-color: rgba(25, 135, 84);
 
   &:hover {
