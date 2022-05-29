@@ -25,7 +25,7 @@ export function* getSingleVimeoVideo({
     const request = yield call(getVimeoData, payload.url);
 
     if (!request.data?.data?.length) {
-      toast.error('Video not found');
+      toast.error('Nie znaleziono filmu');
       yield put({
         type: C.GET_VIMEO_VIDEOS_DATA.success,
       });
@@ -71,13 +71,13 @@ export function* getSingleVimeoVideo({
 
     if (!isAlreadyAdded && !!parsedVimeoVideos[0])
       addItemToLS(parsedVimeoVideos[0]);
-    if (isAlreadyAdded) toast.error('Video is already added');
+    if (isAlreadyAdded) toast.error('Ten film jest już dodany');
 
     yield put({
       type: C.GET_VIMEO_VIDEOS_DATA.success,
     });
   } catch (e) {
-    toast.error('Something went wrong');
+    toast.error('Coś poszło nie tak');
 
     yield put({
       type: C.GET_VIMEO_VIDEOS_DATA.failure,

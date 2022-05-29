@@ -26,7 +26,7 @@ export function* getYoutubeVideos({
     const request = yield call(getYoutubeData, payload.url);
 
     if (!request.data?.items?.length) {
-      toast.error('Video not found');
+      toast.error('Nie znaleziono filmu');
       yield put({
         type: C.GET_YOUTUBE_VIDEOS_DATA.success,
       });
@@ -68,13 +68,13 @@ export function* getYoutubeVideos({
 
     if (!isAlreadyAdded && !!parsedYoutubeVideos[0])
       addItemToLS(parsedYoutubeVideos[0]);
-    if (isAlreadyAdded) toast.error('Video is already added');
+    if (isAlreadyAdded) toast.error('Ten film jest już dodany');
 
     yield put({
       type: C.GET_YOUTUBE_VIDEOS_DATA.success,
     });
   } catch (e) {
-    toast.error('Something went wrong');
+    toast.error('Coś poszło nie tak');
 
     yield put({
       type: C.GET_YOUTUBE_VIDEOS_DATA.failure,

@@ -107,6 +107,9 @@ export const VideosListContextProvider = ({
 
   const PAGE_SIZE = 12;
 
+  const DELETE_ALL_ITEM_MODAL_MESSAGE =
+    'Czy na pewno chcesz usunąć wszystkie filmy?';
+
   const currentVideosList =
     listType === EVideosListTypeKeys.FAVORITE
       ? videosList
@@ -124,8 +127,10 @@ export const VideosListContextProvider = ({
   };
 
   const clearAll = () => {
-    deleteItemFromLS(FAV_VIDEOS);
-    setVideosList([]);
+    if (window.confirm(DELETE_ALL_ITEM_MODAL_MESSAGE)) {
+      deleteItemFromLS(FAV_VIDEOS);
+      setVideosList([]);
+    }
   };
 
   const reloadVideosList = () => {
@@ -157,6 +162,9 @@ export const VideosListContextProvider = ({
       (item: TVideosArrItem) => item.path === url
     );
     currentVideos[videoIndex].favorite = action === EFavoriteVideosActions.ADD;
+    currentVideos[videoIndex].favorite === true
+      ? toast.success('Dodano do ulubionych')
+      : toast.error('Usunięto z ulubionych');
     updateState(currentVideos);
   };
 
@@ -166,10 +174,10 @@ export const VideosListContextProvider = ({
       (item: TVideosArrItem) => item.path === url
     );
     videoIndex === -1
-      ? toast.error('Video not found')
+      ? toast.error('Nie znaleziono filmu')
       : currentVideos.splice(videoIndex, 1);
     updateState(currentVideos);
-    toast.success('Video removed');
+    toast.success('Film usunięty');
   };
 
   const orderByNewest = () => {

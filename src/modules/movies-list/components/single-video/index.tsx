@@ -27,8 +27,11 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
     deleteSingleVideo,
   } = useVideosListContext();
 
+  const DELETE_ITEM_MODAL_MESSAGE = 'Czy na pewno chcesz usunąć ten film?';
+
   const handleDeleteSingleMovie = () => {
-    deleteSingleVideo(movie.path);
+    if (window.confirm(DELETE_ITEM_MODAL_MESSAGE))
+      deleteSingleVideo(movie.path);
   };
 
   return (
