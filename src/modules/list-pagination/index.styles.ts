@@ -39,11 +39,11 @@ export const StyledButton = styled.button<{ backgroundActive?: boolean }>`
   border-radius: 15%;
   &:hover {
     background-color: ${({ backgroundActive }) =>
-      backgroundActive ? 'rgba(0,184,255, 0.7)' : 'rgba(0, 0, 0, 0.13)'};
+      backgroundActive ? 'rgba(33, 149, 220, 1)' : 'rgba(0, 0, 0, 0.13)'};
     transition: 0.4s;
   }
   &:focus {
     background-color: ${({ backgroundActive }) =>
-      backgroundActive ? 'rgba(0,184,255,0.7)' : 'white'};
+      backgroundActive ? 'rgba(33, 149, 220, 1)' : 'white'};
   }
 `;

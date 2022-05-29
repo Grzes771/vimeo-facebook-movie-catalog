@@ -9,7 +9,7 @@ export const StyledForm = styled.form`
   width: 100%;
   height: 90px;
   max-width: 1200px;
-  background-color: #24acff;
+  background-color: rgba(36, 172, 255, 0.7);
   margin: 0px auto 20px auto;
 `;
 

@@ -32,7 +32,7 @@ export const MovieList = () => {
           {displayAllMovies(videosList)}
         </MovieContainer>
       </Container>
-      {videosList.length < 13 ? null : (
+      {videosList.length < 6 ? null : (
         <ListPagination
           filterAndSort={videosList}
           filterAndSortFavorite={videosList}

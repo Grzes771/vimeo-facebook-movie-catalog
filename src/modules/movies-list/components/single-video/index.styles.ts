@@ -37,7 +37,7 @@ export const SingleCardStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
           background-color: rgba(0, 0, 0, 0.03);
           border: 1px solid rgba(0, 0, 0, 0.125);
 
-          @media (max-width: 760px) {
+          @media (max-width: 720px) {
             width: 90%;
           }
         `;

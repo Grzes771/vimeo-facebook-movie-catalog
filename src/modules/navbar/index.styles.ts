@@ -9,7 +9,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   min-height: 50px;
-  background-color: #24acff;
+  background-color: rgba(36, 172, 255, 0.7);
 
   label {
     display: flex;
