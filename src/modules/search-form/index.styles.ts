@@ -4,12 +4,22 @@ export const FormStyle = styled.form`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  max-width: 1200px;
   margin-bottom: 50px;
   margin-top: 50px;
 
+  @media (max-width: 620px) {
+    flex-direction: column;
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+  }
+
   input {
-    width: 500px;
+    width: 40vw;
+
     margin-right: 50px;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
@@ -30,8 +40,12 @@ export const FormStyle = styled.form`
       outline: 3px solid rgba(0, 184, 255, 0.7) !important;
       transition: 0.1s;
     }
+    @media (max-width: 620px) {
+      margin-right: 0px;
+    }
   }
 `;
+
 export const ButtonStyle = styled.button`
   border: none;
   width: 100px;
@@ -56,5 +70,10 @@ export const ButtonStyle = styled.button`
     outline-color: rgba(25, 135, 84, 0.5) !important;
     background-position: bottom;
     transition: 0.1s;
+  }
+  @media (max-width: 620px) {
+    margin-top: 20px;
+    justify-content: center;
+    align-items: center;
   }
 `;

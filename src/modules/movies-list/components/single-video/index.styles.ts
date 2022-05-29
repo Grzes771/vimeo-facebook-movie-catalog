@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { EDisplayTypeKeys } from 'types/order-by-keys';
+import { EDisplayTypeKeys } from 'types/video-list-context-enums';
 
 export const SingleCardStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
   ${({ displayType }) => {
@@ -36,6 +36,7 @@ export const SingleCardStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
           margin: 0px 5% 50px 0px;
           background-color: rgba(0, 0, 0, 0.03);
           border: 1px solid rgba(0, 0, 0, 0.125);
+          transition: 0.2s;
 
           @media (max-width: 640px) {
             width: 90%;

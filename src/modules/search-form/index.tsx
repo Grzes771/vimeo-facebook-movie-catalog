@@ -3,11 +3,14 @@ import { useDispatch } from 'react-redux';
 
 import { getVimeoVideosStarted } from 'store/get-vimeo-videos/actions';
 import { getYoutubeVideosStarted } from 'store/get-youtube-videos/actions';
+
 import { getVideoId } from './helpers';
 
+import { EVideosPlatform } from 'types/video-list-context-enums';
+
 import { FormStyle } from './index.styles';
-import './style.css';
 import { ButtonStyle } from './index.styles';
+import './style.css';
 
 export const SearchForm = () => {
   const [link, setLink] = useState('');
@@ -15,7 +18,7 @@ export const SearchForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (link.includes('vimeo')) {
+    if (link.includes(EVideosPlatform.VIMEO)) {
       dispatch(getVimeoVideosStarted(link));
       setLink('');
     } else {

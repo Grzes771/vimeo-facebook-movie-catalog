@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PaginationWrapper = styled.nav`
+export const Container = styled.nav`
   overflow-x: auto;
   justify-content: center;
   display: flex;
@@ -29,7 +29,7 @@ export const StyledListItem = styled.li<{ isActive?: boolean }>`
   opacity: ${({ isActive }) => (isActive ? '1' : '0.4')};
 `;
 
-export const ButtonStyle = styled.button<{ backgroundActive?: boolean }>`
+export const StyledButton = styled.button<{ backgroundActive?: boolean }>`
   height: 45px;
   width: 45px;
 

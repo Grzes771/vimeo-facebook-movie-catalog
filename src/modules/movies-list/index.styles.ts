@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { EDisplayTypeKeys } from 'types/order-by-keys';
+import { EDisplayTypeKeys } from 'types/video-list-context-enums';
 
 export const MovieContainer = styled.div<{ displayType: EDisplayTypeKeys }>`
   max-width: 1200px;

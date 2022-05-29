@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction, useEffect } from 'react';
 import YouTube, { YouTubeProps } from 'react-youtube';
 import Vimeo from '@u-wave/react-vimeo';
 import ReactDOM from 'react-dom';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { modalIsOpenRX, singleModalVideosDataRX } from 'store/modal/selectors';
-import { setModalActive } from 'store/modal/actions';
+import { useVideosListContext } from 'contexts/video-list-context';
+
+import { EVideosPlatform } from 'types/video-list-context-enums';
 
 import './style.css';
 import * as S from './index.styles';
@@ -18,23 +18,21 @@ const youTubeOptions = {
   },
 };
 
-export const VideoModal = () => {
-  const dispatch = useDispatch();
-  const singleModalVideoData = useSelector(singleModalVideosDataRX);
-  const singleModalVideo = {
-    title: singleModalVideoData?.title,
-    platform: singleModalVideoData?.platform,
-    url: singleModalVideoData?.path,
-  };
+type TModalShowVideo = {
+  setModalIsOpen: Dispatch<SetStateAction<boolean>>;
+};
 
-  const isModalOpenedData = useSelector(modalIsOpenRX);
+export const VideoModal = ({ setModalIsOpen }: TModalShowVideo) => {
+  const { modalIsActive, setModalIsActive, singleVideo, setSingleVideo } =
+    useVideosListContext();
 
   const onReady: YouTubeProps['onReady'] = (event) => {
     event.target.pauseVideo();
   };
-  const handleCloseModal = () => {
-    dispatch(setModalActive(false));
-  };
+
+  useEffect(() => {
+    setModalIsOpen(modalIsActive);
+  }, [modalIsActive]);
 
   return (
     <div
@@ -43,20 +41,20 @@ export const VideoModal = () => {
         justifyContent: 'center',
       }}
     >
-      {isModalOpenedData && (
+      {modalIsActive && (
         <S.ModalStyle data-testid="modal">
-          <S.ModalHeaderStyle>{singleModalVideo.title}</S.ModalHeaderStyle>
+          <S.ModalHeaderStyle>{singleVideo?.title}</S.ModalHeaderStyle>
           <S.ModalBodyStyle>
-            {singleModalVideo.platform === 'youtube' ? (
+            {singleVideo?.platform === EVideosPlatform.YOUTUBE ? (
               <YouTube
-                videoId={singleModalVideo.url}
+                videoId={singleVideo?.path}
                 opts={youTubeOptions}
                 onReady={onReady}
               />
             ) : (
               //@ts-ignore
               <Vimeo
-                video={singleModalVideo.url ?? ''}
+                video={singleVideo?.path ?? ''}
                 autoplay
                 width="300px"
                 responsive
@@ -68,7 +66,10 @@ export const VideoModal = () => {
               color="secondary"
               type="submit"
               aria-label="modal"
-              onClick={handleCloseModal}
+              onClick={() => {
+                setSingleVideo(undefined);
+                setModalIsActive(false);
+              }}
             >
               close
             </S.Button>
@@ -79,5 +80,8 @@ export const VideoModal = () => {
   );
 };
 
-export const ModalShowVideo = () =>
-  ReactDOM.createPortal(<VideoModal />, document.getElementById('root')!);
+export const ModalShowVideo = ({ setModalIsOpen }: any) =>
+  ReactDOM.createPortal(
+    <VideoModal {...{ setModalIsOpen }} />,
+    document.getElementById('root')!
+  );

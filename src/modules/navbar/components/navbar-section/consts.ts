@@ -1,9 +1,20 @@
-import { EDisplayTypeKeys, EOrderByKeys } from 'types/order-by-keys';
+import {
+  EDisplayTypeKeys,
+  EOrderByKeys,
+  EVideosListActions,
+  EVideosListTypeKeys,
+} from 'types/video-list-context-enums';
 import { ENavbarSectionKeys, TNavbarSection } from './types';
 
 type TNavbarSectionsProps = {
   handleIsActive: (id: string) => boolean | undefined;
-  handleOnClick: (id: string) => void;
+  handleOnClick: (
+    id:
+      | EVideosListActions
+      | EOrderByKeys
+      | EDisplayTypeKeys
+      | EVideosListTypeKeys
+  ) => void;
 };
 
 export const NAVBAR_SECTIONS = ({
@@ -14,8 +25,8 @@ export const NAVBAR_SECTIONS = ({
     [ENavbarSectionKeys.LABEL]: 'Akcje',
     [ENavbarSectionKeys.LEFT_BUTTON_LABEL]: 'Wyczyść',
     [ENavbarSectionKeys.RIGHT_BUTTON_LABEL]: 'Wgraj demo',
-    [ENavbarSectionKeys.ID_LEFT]: 'clearAll',
-    [ENavbarSectionKeys.ID_RIGHT]: 'loadDemo',
+    [ENavbarSectionKeys.ID_LEFT]: EVideosListActions.CLEAR_ALL,
+    [ENavbarSectionKeys.ID_RIGHT]: EVideosListActions.LOAD_DEMO,
     [ENavbarSectionKeys.BUTTON_IS_ACTIVE]: handleIsActive,
     [ENavbarSectionKeys.BUTTON_ON_CLICK]: handleOnClick,
   },

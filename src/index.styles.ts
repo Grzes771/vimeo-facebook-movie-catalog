@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
-export const AppStyle = styled.div<{ isModalOpen?: boolean }>`
+export const AppStyle = styled.div<{ modalIsOpen?: boolean }>`
   text-align: center;
   max-width: 1300px;
   margin: 0 auto;
 
-  opacity: ${({ isModalOpen }) => (isModalOpen ? 0.4 : 1)};
-  pointer-events: ${({ isModalOpen }) => (isModalOpen ? 'none' : 'auto')};
+  opacity: ${({ modalIsOpen }) => (modalIsOpen ? 0.4 : 1)};
+  pointer-events: ${({ modalIsOpen }) => (modalIsOpen ? 'none' : 'auto')};
 `;
 
 export const Row = styled.div`

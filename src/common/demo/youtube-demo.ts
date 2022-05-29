@@ -1,9 +1,10 @@
 import { TVideosArrItem } from 'store/types/movie-item';
+import { EVideosPlatform } from 'types/video-list-context-enums';
 
 export const YOUTUBE_DEMO: readonly TVideosArrItem[] = Object.freeze([
   {
     date: 1650387611752,
-    platform: 'youtube',
+    platform: EVideosPlatform.YOUTUBE,
     favorite: false,
     likes: 3280106,
     path: 'fnlJw9H0xAM',
@@ -16,7 +17,7 @@ export const YOUTUBE_DEMO: readonly TVideosArrItem[] = Object.freeze([
     favorite: false,
     likes: 16796,
     path: 'zfwGiieFkKo',
-    platform: 'youtube',
+    platform: EVideosPlatform.YOUTUBE,
     thumbNails: 'https://i.ytimg.com/vi/zfwGiieFkKo/mqdefault.jpg',
     title: 'Dżem - Whiskey',
     viewsCount: 3369281,
@@ -26,7 +27,7 @@ export const YOUTUBE_DEMO: readonly TVideosArrItem[] = Object.freeze([
     favorite: false,
     likes: 785697,
     path: 'rGedjDnQ9cw',
-    platform: 'youtube',
+    platform: EVideosPlatform.YOUTUBE,
     thumbNails: 'https://i.ytimg.com/vi/rGedjDnQ9cw/mqdefault.jpg',
     title: 'New Divide [Official Live in Red Square 2011] - Linkin Park',
     viewsCount: 116690283,
@@ -36,7 +37,7 @@ export const YOUTUBE_DEMO: readonly TVideosArrItem[] = Object.freeze([
     favorite: false,
     likes: 750,
     path: 'gNQd3wrxlL0',
-    platform: 'youtube',
+    platform: EVideosPlatform.YOUTUBE,
     thumbNails: 'https://i.ytimg.com/vi/gNQd3wrxlL0/mqdefault.jpg',
     title: 'CZAQU - "Inność" - wydanie 2003',
     viewsCount: 100012,
@@ -46,7 +47,7 @@ export const YOUTUBE_DEMO: readonly TVideosArrItem[] = Object.freeze([
     favorite: false,
     likes: 29,
     path: 'GNrsu95C-Yw',
-    platform: 'youtube',
+    platform: EVideosPlatform.YOUTUBE,
     thumbNails: 'https://i.ytimg.com/vi/GNrsu95C-Yw/mqdefault.jpg',
     title: 'CZAQU - Zdumiony',
     viewsCount: 2192,

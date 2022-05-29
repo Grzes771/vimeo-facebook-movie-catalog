@@ -9,6 +9,7 @@ export const Container = styled.form`
     justify-content: space-between;
     align-items: center;
     width: 350px;
+    transition: 0.5s;
   }
 `;
 

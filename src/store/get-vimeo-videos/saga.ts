@@ -11,9 +11,9 @@ import {
 } from '../../helpers/local-storage';
 import { getVimeoVideosStarted } from './actions';
 import { TVideosArrItem } from '../types/movie-item';
+import { EVideosPlatform } from 'types/video-list-context-enums';
 
 import * as C from './consts';
-import { StringLiteral } from 'typescript';
 
 toast.configure();
 
@@ -41,7 +41,7 @@ export function* getSingleVimeoVideo({
       metadata: {
         connections: {
           likes: {
-            total: StringLiteral;
+            total: string;
           };
         };
       };
@@ -49,7 +49,7 @@ export function* getSingleVimeoVideo({
         plays: string;
       };
       pictures: {
-        sizes: any;
+        sizes: string;
       };
     };
     const parsedVimeoVideos = request.data.data.map(
@@ -61,7 +61,7 @@ export function* getSingleVimeoVideo({
         likes: arrItem?.metadata.connections.likes.total,
         favorite: favVideosIds.includes(arrItem.link),
         date: Date.now(),
-        platform: 'vimeo',
+        platform: EVideosPlatform.VIMEO,
       })
     );
 

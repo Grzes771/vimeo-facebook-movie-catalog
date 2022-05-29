@@ -1,3 +1,5 @@
+import { TIdsValues } from 'types/video-list-context-enums';
+
 export enum ENavbarSectionKeys {
   LABEL = 'label',
   LEFT_BUTTON_LABEL = 'leftButtonLabel',
@@ -12,8 +14,8 @@ export type TNavbarSection = {
   [ENavbarSectionKeys.LABEL]: string;
   [ENavbarSectionKeys.LEFT_BUTTON_LABEL]: string;
   [ENavbarSectionKeys.RIGHT_BUTTON_LABEL]: string;
-  [ENavbarSectionKeys.ID_LEFT]: string;
-  [ENavbarSectionKeys.ID_RIGHT]: string;
+  [ENavbarSectionKeys.ID_LEFT]: TIdsValues;
+  [ENavbarSectionKeys.ID_RIGHT]: TIdsValues;
   [ENavbarSectionKeys.BUTTON_IS_ACTIVE]: (id: string) => boolean | undefined;
-  [ENavbarSectionKeys.BUTTON_ON_CLICK]: (id: string) => void;
+  [ENavbarSectionKeys.BUTTON_ON_CLICK]: (id: TIdsValues) => void;
 };

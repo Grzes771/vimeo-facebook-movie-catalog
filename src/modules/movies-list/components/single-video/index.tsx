@@ -1,7 +1,4 @@
-import { useDispatch } from 'react-redux';
-
 import { TVideosArrItem } from 'store/types/movie-item';
-import { setModalActive, setVideoDetails } from 'store/modal/actions';
 import { useVideosListContext } from 'contexts/video-list-context';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +8,9 @@ import {
   faTrashAlt,
   faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
+
+import { EFavoriteVideosActions } from 'types/video-list-context-enums';
+
 import {
   SingleCardStyle,
   CardImageWrapper,
@@ -25,28 +25,28 @@ type TSingleMovie = {
 };
 
 export const SingleMovie = ({ movie }: TSingleMovie) => {
-  const { displayType, addOrRemoveVideoFromFavorite, deleteSingleVideo } =
-    useVideosListContext();
-
-  const dispatch = useDispatch();
-
-  const handleOpenModal = () => {
-    dispatch(setModalActive(true));
-    dispatch(setVideoDetails(movie));
-  };
+  const {
+    displayType,
+    setModalIsActive,
+    setSingleVideo,
+    addOrRemoveVideoFromFavorite,
+    deleteSingleVideo,
+  } = useVideosListContext();
 
   const handleDeleteSingleMovie = () => {
     deleteSingleVideo(movie.path);
   };
 
-  /* const truncateText = (str: string) => {
-    return str.length > 40 ? str.substring(0, 50) + '...' : str;
-  }; */
-
   return (
     <SingleCardStyle displayType={displayType} data-testid="card">
-      <CardImageWrapper displayType={displayType}>
-        <img src={movie.thumbNails} alt="thumbnail" onClick={handleOpenModal} />
+      <CardImageWrapper
+        displayType={displayType}
+        onClick={() => {
+          setSingleVideo(movie);
+          setModalIsActive(true);
+        }}
+      >
+        <img src={movie.thumbNails} alt="thumbnail" />
       </CardImageWrapper>
       <ContentWrapper displayType={displayType}>
         <CardHeaderStyle displayType={displayType}>
@@ -75,7 +75,9 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
                 onClick={() =>
                   addOrRemoveVideoFromFavorite(
                     movie.path,
-                    movie?.favorite ? 'remove' : 'add'
+                    movie?.favorite
+                      ? EFavoriteVideosActions.REMOVE
+                      : EFavoriteVideosActions.ADD
                   )
                 }
               />

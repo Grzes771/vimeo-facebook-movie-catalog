@@ -1,6 +1,9 @@
+import { NONAME } from 'dns';
 import styled from 'styled-components';
 
-export const Form = styled.form`
+import { EVideosListTypeKeys } from 'types/video-list-context-enums';
+
+export const StyledForm = styled.form`
   display: flex;
   align-items: center;
   justify-content: right;
@@ -11,13 +14,19 @@ export const Form = styled.form`
   margin: 0px auto 20px auto;
 `;
 
-export const Button = styled.button<{ favorite?: string; id: string }>`
-  outline: ${({ favorite, id }) =>
-    favorite === 'all' && id === 'all'
-      ? '2px solid white !important'
-      : favorite === 'favorite' && id === 'favorite'
-      ? '2px solid white !important'
-      : 'none'};
+export const StyledButton = styled.button<{
+  listType: EVideosListTypeKeys;
+  id: EVideosListTypeKeys;
+}>`
+  outline: ${
+    ({ listType, id }) =>
+      listType === id ? '2px solid white !important' : 'none'
+    // favorite === 'all' && id === 'all'
+    //   ? '2px solid white !important'
+    //   : favorite === 'favorite' && id === 'favorite'
+    //   ? '2px solid white !important'
+    //   : 'none'
+  };
   border: none;
   width: 120px;
   height: 35px;

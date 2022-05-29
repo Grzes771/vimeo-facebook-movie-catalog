@@ -25,7 +25,16 @@ import {
 import { getVideoId } from 'modules/search-form/helpers';
 
 import { TVideosArrItem } from 'store/types/movie-item';
-import { EDisplayTypeKeys, EOrderByKeys } from 'types/order-by-keys';
+import {
+  EDisplayTypeKeys,
+  EFavoriteVideosActions,
+  EOrderByKeys,
+  EVideosListActions,
+  EVideosListTypeKeys,
+  EVideosPlatform,
+  TIdsValues,
+} from 'types/video-list-context-enums';
+
 import { YOUTUBE_DEMO } from 'common/demo/youtube-demo';
 import { VIMEO_DEMO } from 'common/demo/vimeo-demo';
 
@@ -37,24 +46,39 @@ type TVideosListContextProps = {
   videosList: TVideosArrItem[];
   currentPage: number;
   displayType: EDisplayTypeKeys;
+  listType: EVideosListTypeKeys;
+  modalIsActive: boolean;
+  singleVideo: TVideosArrItem | undefined;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  setListType: Dispatch<SetStateAction<EVideosListTypeKeys>>;
+  setModalIsActive: Dispatch<SetStateAction<boolean>>;
+  setSingleVideo: Dispatch<SetStateAction<TVideosArrItem | undefined>>;
   reloadVideosList: () => void;
   addSingleVideo: (url: string) => void;
-  addOrRemoveVideoFromFavorite: (url: string, action: 'add' | 'remove') => void;
+  addOrRemoveVideoFromFavorite: (
+    url: string,
+    action: EFavoriteVideosActions
+  ) => void;
   deleteSingleVideo: (url: string) => void;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
   handleIsActive: (id: string) => boolean | undefined;
-  handleOnClick: (id: string) => void;
+  handleOnClick: (id: TIdsValues) => void;
 };
 
 export const VideosListContext = createContext<TVideosListContextProps>({
   videosList: [],
   currentPage: 0,
   displayType: EDisplayTypeKeys.TILES,
+  listType: EVideosListTypeKeys.ALL,
+  modalIsActive: false,
+  singleVideo: undefined,
+  setCurrentPage: () => {},
+  setListType: () => {},
+  setModalIsActive: () => {},
+  setSingleVideo: () => {},
   reloadVideosList: () => {},
   addSingleVideo: () => {},
   addOrRemoveVideoFromFavorite: () => {},
   deleteSingleVideo: () => {},
-  setCurrentPage: () => {},
   handleIsActive: () => true,
   handleOnClick: () => {},
 });
@@ -62,16 +86,36 @@ export const VideosListContext = createContext<TVideosListContextProps>({
 export const VideosListContextProvider = ({
   children,
 }: TVideosListContextProviderProps) => {
-  const [videosList, setVideosList] = useState<TVideosArrItem[]>([]);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [listType, setListType] = useState<EVideosListTypeKeys>(
+    EVideosListTypeKeys.ALL
+  );
   const [orderBy, setOrderBy] = useState<EOrderByKeys>(EOrderByKeys.NEWEST);
   const [displayType, setDisplayType] = useState<EDisplayTypeKeys>(
     EDisplayTypeKeys.TILES
   );
+  const [videosList, setVideosList] = useState<TVideosArrItem[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [modalIsActive, setModalIsActive] = useState<boolean>(false);
+  const [singleVideo, setSingleVideo] = useState<TVideosArrItem | undefined>(
+    undefined
+  );
+
   const addYoutubeVideoIsSuccess = useSelector(addYoutubeVideoIsSuccessRX);
   const addVimeoVideoIsSuccess = useSelector(addVimeoVideoIsSuccessRX);
 
   const dispatch = useDispatch();
+
+  const PAGE_SIZE = 12;
+
+  const currentVideosList =
+    listType === EVideosListTypeKeys.FAVORITE
+      ? videosList
+          .filter((video) => video.favorite)
+          ?.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE)
+      : videosList?.slice(
+          currentPage * PAGE_SIZE,
+          (currentPage + 1) * PAGE_SIZE
+        );
 
   const loadDemo = () => {
     const demoArr = [...YOUTUBE_DEMO, ...VIMEO_DEMO];
@@ -96,7 +140,7 @@ export const VideosListContextProvider = ({
   };
 
   const addSingleVideo = (url: string) => {
-    if (url.includes('vimeo')) {
+    if (url.includes(EVideosPlatform.VIMEO)) {
       dispatch(getVimeoVideosStarted(url));
     } else {
       const videoId = getVideoId(url);
@@ -106,15 +150,13 @@ export const VideosListContextProvider = ({
 
   const addOrRemoveVideoFromFavorite = (
     url: string,
-    action: 'add' | 'remove'
+    action: EFavoriteVideosActions
   ) => {
     const currentVideos = getLocalStorage(FAV_VIDEOS);
     const videoIndex = currentVideos.findIndex(
       (item: TVideosArrItem) => item.path === url
     );
-
-    currentVideos[videoIndex].favorite = action === 'add';
-
+    currentVideos[videoIndex].favorite = action === EFavoriteVideosActions.ADD;
     updateState(currentVideos);
   };
 
@@ -147,7 +189,6 @@ export const VideosListContextProvider = ({
   };
 
   const handleIsActive = (id: string): boolean | undefined => {
-    console.log({ id });
     switch (id) {
       case EOrderByKeys.NEWEST:
         return id === EOrderByKeys.NEWEST && orderBy === EOrderByKeys.NEWEST;
@@ -162,12 +203,12 @@ export const VideosListContextProvider = ({
     }
   };
 
-  const handleOnClick = (id: string) => {
+  const handleOnClick = (id: TIdsValues) => {
     switch (id) {
-      case 'clearAll':
+      case EVideosListActions.CLEAR_ALL:
         clearAll();
         break;
-      case 'loadDemo':
+      case EVideosListActions.LOAD_DEMO:
         loadDemo();
         break;
       case EOrderByKeys.NEWEST:
@@ -182,28 +223,17 @@ export const VideosListContextProvider = ({
       case EDisplayTypeKeys.LIST:
         setDisplayType(EDisplayTypeKeys.LIST);
         break;
+      case EVideosListTypeKeys.ALL:
+        setListType(EVideosListTypeKeys.ALL);
+        break;
+      case EVideosListTypeKeys.FAVORITE:
+        setListType(EVideosListTypeKeys.FAVORITE);
+        break;
+
       default:
         break;
     }
   };
-
-  console.log({ orderBy, displayType });
-
-  const memoizedValue = useMemo(
-    () => ({
-      videosList,
-      currentPage,
-      displayType,
-      reloadVideosList,
-      addSingleVideo,
-      addOrRemoveVideoFromFavorite,
-      deleteSingleVideo,
-      setCurrentPage,
-      handleIsActive,
-      handleOnClick,
-    }),
-    [JSON.stringify(videosList), currentPage, orderBy, displayType]
-  );
 
   useEffect(() => {
     reloadVideosList();
@@ -212,6 +242,36 @@ export const VideosListContextProvider = ({
   useEffect(() => {
     if (addYoutubeVideoIsSuccess || addVimeoVideoIsSuccess) reloadVideosList();
   }, [addYoutubeVideoIsSuccess, addVimeoVideoIsSuccess]);
+
+  const memoizedValue = useMemo(
+    () => ({
+      videosList: currentVideosList,
+      currentPage,
+      displayType,
+      listType,
+      modalIsActive,
+      singleVideo,
+      setCurrentPage,
+      setListType,
+      setModalIsActive,
+      setSingleVideo,
+      reloadVideosList,
+      addSingleVideo,
+      addOrRemoveVideoFromFavorite,
+      deleteSingleVideo,
+      handleIsActive,
+      handleOnClick,
+    }),
+    [
+      JSON.stringify(videosList),
+      currentPage,
+      orderBy,
+      displayType,
+      listType,
+      modalIsActive,
+      singleVideo,
+    ]
+  );
 
   return (
     <VideosListContext.Provider value={memoizedValue}>

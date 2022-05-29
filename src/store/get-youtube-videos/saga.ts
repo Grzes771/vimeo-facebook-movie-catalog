@@ -11,8 +11,10 @@ import {
 } from '../../helpers/local-storage';
 import { getYoutubeVideosStarted } from './actions';
 
-import * as C from './consts';
 import { TVideosArrItem } from '../types/movie-item';
+import { EVideosPlatform } from 'types/video-list-context-enums';
+
+import * as C from './consts';
 
 toast.configure();
 
@@ -56,7 +58,7 @@ export function* getYoutubeVideos({
         favorite: false,
 
         date: Date.now(),
-        platform: 'youtube',
+        platform: EVideosPlatform.YOUTUBE,
       })
     );
 
