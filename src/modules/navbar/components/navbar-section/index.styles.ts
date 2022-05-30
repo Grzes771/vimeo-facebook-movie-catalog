@@ -48,8 +48,4 @@ export const StyledButton = styled.button<{
     background-position: bottom;
     transition: 0.4s;
   }
-  &:focus {
-    background-position: bottom;
-    transition: 0.1s;
-  }
 `;

@@ -192,6 +192,7 @@ export const CardFooterStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
           width: auto;
           position: static;
           height: 100%;
+          padding: 0px 0px 5px 00px;
 
           span {
             padding: 0px 10px 0px 10px;
