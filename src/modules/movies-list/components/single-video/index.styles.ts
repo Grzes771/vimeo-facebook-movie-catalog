@@ -134,20 +134,21 @@ export const CardHeaderStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
         return css`
           padding: 0.5rem 1rem 0.1rem 1rem;
           margin-bottom: 0;
-          width: 100%;
-
+          width: calc(100%);
+          display: flex;
+ 
           p {
+            display: block;
             height: 15px;
             font-size: 13px;
-            display: flex;
-            justify-content: flex-start;
+            min-width: 0
             align-items: center;
             font-weight: 600;
             word-break: break-all;
             margin-bottom: 10px;
-            text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
+            text-overflow: ellipsis;
           }
         `;
       default:
