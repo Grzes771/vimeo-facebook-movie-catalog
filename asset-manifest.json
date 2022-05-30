@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vimeo-youtube-movie-catalog/static/css/main.3d2d1a23.css",
-    "main.js": "/vimeo-youtube-movie-catalog/static/js/main.2d0f4df7.js",
-    "static/js/787.a9b37f42.chunk.js": "/vimeo-youtube-movie-catalog/static/js/787.a9b37f42.chunk.js",
+    "main.js": "/vimeo-youtube-movie-catalog/static/js/main.3094155f.js",
+    "static/js/787.64bc7bad.chunk.js": "/vimeo-youtube-movie-catalog/static/js/787.64bc7bad.chunk.js",
     "index.html": "/vimeo-youtube-movie-catalog/index.html",
     "main.3d2d1a23.css.map": "/vimeo-youtube-movie-catalog/static/css/main.3d2d1a23.css.map",
-    "main.2d0f4df7.js.map": "/vimeo-youtube-movie-catalog/static/js/main.2d0f4df7.js.map",
-    "787.a9b37f42.chunk.js.map": "/vimeo-youtube-movie-catalog/static/js/787.a9b37f42.chunk.js.map"
+    "main.3094155f.js.map": "/vimeo-youtube-movie-catalog/static/js/main.3094155f.js.map",
+    "787.64bc7bad.chunk.js.map": "/vimeo-youtube-movie-catalog/static/js/787.64bc7bad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d2d1a23.css",
-    "static/js/main.2d0f4df7.js"
+    "static/js/main.3094155f.js"
   ]
 }
