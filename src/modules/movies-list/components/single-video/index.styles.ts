@@ -139,7 +139,6 @@ export const CardHeaderStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
  
           p {
             display: block;
-            height: 15px;
             font-size: 13px;
             min-width: 0
             align-items: center;
