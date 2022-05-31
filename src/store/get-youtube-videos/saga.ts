@@ -73,6 +73,7 @@ export function* getYoutubeVideos({
     yield put({
       type: C.GET_YOUTUBE_VIDEOS_DATA.success,
     });
+    toast.success('Film został dodany');
   } catch (e) {
     toast.error('Coś poszło nie tak');
 

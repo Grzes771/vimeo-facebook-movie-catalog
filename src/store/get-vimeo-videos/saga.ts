@@ -76,6 +76,7 @@ export function* getSingleVimeoVideo({
     yield put({
       type: C.GET_VIMEO_VIDEOS_DATA.success,
     });
+    toast.success('Film został dodany');
   } catch (e) {
     toast.error('Coś poszło nie tak');
 
