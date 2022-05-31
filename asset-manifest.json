@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vimeo-youtube-movie-catalog/static/css/main.3d2d1a23.css",
-    "main.js": "/vimeo-youtube-movie-catalog/static/js/main.cc2e2bb8.js",
+    "main.js": "/vimeo-youtube-movie-catalog/static/js/main.3b43ae14.js",
     "static/js/787.64bc7bad.chunk.js": "/vimeo-youtube-movie-catalog/static/js/787.64bc7bad.chunk.js",
     "index.html": "/vimeo-youtube-movie-catalog/index.html",
     "main.3d2d1a23.css.map": "/vimeo-youtube-movie-catalog/static/css/main.3d2d1a23.css.map",
-    "main.cc2e2bb8.js.map": "/vimeo-youtube-movie-catalog/static/js/main.cc2e2bb8.js.map",
+    "main.3b43ae14.js.map": "/vimeo-youtube-movie-catalog/static/js/main.3b43ae14.js.map",
     "787.64bc7bad.chunk.js.map": "/vimeo-youtube-movie-catalog/static/js/787.64bc7bad.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3d2d1a23.css",
-    "static/js/main.cc2e2bb8.js"
+    "static/js/main.3b43ae14.js"
   ]
 }
