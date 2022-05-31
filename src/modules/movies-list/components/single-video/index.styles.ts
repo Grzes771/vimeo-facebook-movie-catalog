@@ -215,6 +215,11 @@ export const CardFooterStyle = styled.div<{ displayType: EDisplayTypeKeys }>`
             justify-content: flex-end;
             align-items: flex-start;
           }
+          @media (max-width: 340px) {
+            div {
+              display: flex;
+            }
+          }
         `;
 
       default:

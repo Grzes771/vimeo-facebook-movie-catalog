@@ -1,29 +1,19 @@
 import React, { useEffect } from 'react';
 
-import { TVideosArrItem } from 'store/types/movie-item';
 import { useVideosListContext } from 'contexts/video-list-context';
+
+import { EVideosListTypeKeys } from 'types/video-list-context-enums';
 
 import * as S from './index.styles';
 
-type TProps = {
-  filterAndSort: TVideosArrItem[];
-  filterAndSortFavorite: TVideosArrItem[] | undefined;
-};
-
-export const ListPagination = ({
-  filterAndSort,
-  filterAndSortFavorite,
-}: TProps) => {
-  const { currentPage, setCurrentPage, listType } = useVideosListContext();
-
-  const showInputValues = {
-    favorite: listType,
-  };
+export const ListPagination = () => {
+  const { currentPage, setCurrentPage, listType, videosList } =
+    useVideosListContext();
 
   const pagesCount =
-    showInputValues.favorite === 'favorite'
-      ? Math.ceil(filterAndSortFavorite!.length / 12)
-      : Math.ceil(filterAndSort?.length / 12);
+    listType === EVideosListTypeKeys.FAVORITE
+      ? Math.ceil(videosList.map(({ favorite }) => favorite).length / 12)
+      : Math.ceil(videosList.length / 12);
 
   useEffect(() => {
     setCurrentPage(currentPage);
@@ -56,7 +46,7 @@ export const ListPagination = ({
             &#8249;
           </S.StyledButton>
         </S.StyledListItem>
-        {[...Array(pagesCount)].map((video, i) => (
+        {[...Array(pagesCount + 1)].map((page: number, i) => (
           <S.StyledListItem isActive={true} key={i}>
             <S.StyledButton
               onClick={(e) => handleClick(e, i)}
@@ -67,7 +57,7 @@ export const ListPagination = ({
             </S.StyledButton>
           </S.StyledListItem>
         ))}
-        <S.StyledListItem isActive={currentPage < pagesCount - 1}>
+        <S.StyledListItem isActive={currentPage < pagesCount}>
           <S.StyledButton
             data-testid="pagination-link"
             onClick={(e) => handleClick(e, currentPage + 1)}
@@ -75,10 +65,10 @@ export const ListPagination = ({
             &#8250;
           </S.StyledButton>
         </S.StyledListItem>
-        <S.StyledListItem isActive={currentPage < pagesCount - 1}>
+        <S.StyledListItem isActive={currentPage < pagesCount}>
           <S.StyledButton
             data-testid="pagination-link"
-            onClick={(e) => handleClick(e, pagesCount - 1)}
+            onClick={(e) => handleClick(e, pagesCount)}
           >
             &raquo;
           </S.StyledButton>

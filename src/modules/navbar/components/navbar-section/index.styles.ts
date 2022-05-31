@@ -19,10 +19,18 @@ export const Label = styled.label`
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+
+    @media (max-width: 620px) {
+      display: none !important;
+    }
   }
 `;
 
-export const ButtonsContainer = styled.div``;
+export const ButtonsContainer = styled.div`
+  @media (max-width: 620px) {
+    margin: 0px auto 0px auto;
+  }
+`;
 
 export const StyledButton = styled.button<{
   isActive: boolean | undefined;
@@ -47,5 +55,9 @@ export const StyledButton = styled.button<{
   &:hover {
     background-position: bottom;
     transition: 0.4s;
+  }
+  @media (max-width: 620px) {
+    margin: 5px 5px 5px 5px;
+    display: inline-block;
   }
 `;

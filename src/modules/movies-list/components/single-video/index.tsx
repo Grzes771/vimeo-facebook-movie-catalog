@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { TVideosArrItem } from 'store/types/movie-item';
 import { useVideosListContext } from 'contexts/video-list-context';
 
@@ -9,8 +10,14 @@ import {
   faThumbsUp,
 } from '@fortawesome/free-solid-svg-icons';
 
-import { EFavoriteVideosActions } from 'types/video-list-context-enums';
+import { getVideoIdFromUrl } from 'modules/search-form/helpers';
 
+import {
+  EFavoriteVideosActions,
+  EVideosPlatform,
+} from 'types/video-list-context-enums';
+
+import { VIMEO_YOUTUBE_MOVIE_CATALOG } from 'App';
 import * as S from './index.styles';
 import './icons-styles.css';
 
@@ -21,11 +28,12 @@ type TSingleMovie = {
 export const SingleMovie = ({ movie }: TSingleMovie) => {
   const {
     displayType,
-    setModalIsActive,
     setSingleVideo,
     addOrRemoveVideoFromFavorite,
     deleteSingleVideo,
   } = useVideosListContext();
+
+  const navigate = useNavigate();
 
   const DELETE_ITEM_MODAL_MESSAGE = 'Czy na pewno chcesz usunąć ten film?';
 
@@ -34,15 +42,22 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
       deleteSingleVideo(movie.path);
   };
 
+  const handleOnClick = () => {
+    setSingleVideo(movie);
+
+    const movieId =
+      movie.platform === EVideosPlatform.VIMEO
+        ? getVideoIdFromUrl(movie.path)
+        : movie.path;
+
+    console.log({ movieId });
+
+    navigate(`/${VIMEO_YOUTUBE_MOVIE_CATALOG}/${movieId}`);
+  };
+
   return (
     <S.SingleCardStyle displayType={displayType} data-testid="card">
-      <S.CardImageWrapper
-        displayType={displayType}
-        onClick={() => {
-          setSingleVideo(movie);
-          setModalIsActive(true);
-        }}
-      >
+      <S.CardImageWrapper displayType={displayType} onClick={handleOnClick}>
         <img src={movie.thumbNails} alt="thumbnail" />
       </S.CardImageWrapper>
       <S.ContentWrapper displayType={displayType}>

@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { SearchForm } from 'modules/search-form';
 import { MovieList } from 'modules/movies-list';
-import { ModalShowVideo } from 'modules/video-modal';
+import { VideoModal } from 'modules/video-modal';
 import { FavoritePanel } from 'modules/favorite-panel';
 import { MainPanelView } from 'modules/navbar';
 
@@ -12,21 +12,38 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import { AppStyle } from './index.styles';
 
-export const App = () => {
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+export const VIMEO_YOUTUBE_MOVIE_CATALOG = 'vimeo-youtube-movie-catalog';
 
+export const App = () => {
+  const main = (
+    <>
+      <SearchForm />
+      <MainPanelView />
+      <MovieList />
+    </>
+  );
   return (
-    <div>
-      <AppStyle {...{ modalIsOpen }}>
+    <BrowserRouter>
+      <AppStyle>
         <VideosListContextProvider>
           <FavoritePanel />
-          <SearchForm />
-          <MainPanelView />
-          <MovieList />
-          <ModalShowVideo {...{ setModalIsOpen }} />
+          <Routes>
+            <Route
+              path={VIMEO_YOUTUBE_MOVIE_CATALOG}
+              element={main}
+              key={VIMEO_YOUTUBE_MOVIE_CATALOG}
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path={`${VIMEO_YOUTUBE_MOVIE_CATALOG}/:movieId`}
+              element={<VideoModal />}
+              key="modal"
+            />
+          </Routes>
         </VideosListContextProvider>
       </AppStyle>
-    </div>
+    </BrowserRouter>
   );
 };
 

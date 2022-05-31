@@ -16,7 +16,7 @@ import { EVideosPlatform } from 'types/video-list-context-enums';
 
 import * as C from './consts';
 
-toast.configure();
+toast.configure({ autoClose: 1500 });
 
 export function* getYoutubeVideos({
   payload,

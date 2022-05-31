@@ -10,7 +10,7 @@ const getVideoIdFromParameter = (
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 };
 
-const getVideoIdFromUrl = (url: string): string | undefined => {
+export const getVideoIdFromUrl = (url: string): string | undefined => {
   const splittedVideo = url.split('/');
   return splittedVideo[splittedVideo.length - 1];
 };

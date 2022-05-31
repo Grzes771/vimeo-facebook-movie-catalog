@@ -44,6 +44,7 @@ type TVideosListContextProviderProps = {
 
 type TVideosListContextProps = {
   videosList: TVideosArrItem[];
+  videosTotalCount: number;
   currentPage: number;
   displayType: EDisplayTypeKeys;
   listType: EVideosListTypeKeys;
@@ -56,16 +57,17 @@ type TVideosListContextProps = {
   reloadVideosList: () => void;
   addSingleVideo: (url: string) => void;
   addOrRemoveVideoFromFavorite: (
-    url: string,
+    url: string | undefined,
     action: EFavoriteVideosActions
   ) => void;
-  deleteSingleVideo: (url: string) => void;
+  deleteSingleVideo: (url: string | undefined) => void;
   handleIsActive: (id: string) => boolean | undefined;
   handleOnClick: (id: TIdsValues) => void;
 };
 
 export const VideosListContext = createContext<TVideosListContextProps>({
   videosList: [],
+  videosTotalCount: 0,
   currentPage: 0,
   displayType: EDisplayTypeKeys.TILES,
   listType: EVideosListTypeKeys.ALL,
@@ -94,6 +96,7 @@ export const VideosListContextProvider = ({
     EDisplayTypeKeys.TILES
   );
   const [videosList, setVideosList] = useState<TVideosArrItem[]>([]);
+  const [videosTotalCount, setVideosTotalCount] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(0);
   const [modalIsActive, setModalIsActive] = useState<boolean>(false);
   const [singleVideo, setSingleVideo] = useState<TVideosArrItem | undefined>(
@@ -127,6 +130,7 @@ export const VideosListContextProvider = ({
   };
 
   const clearAll = () => {
+    if (videosList.length === 0) return;
     if (window.confirm(DELETE_ALL_ITEM_MODAL_MESSAGE)) {
       deleteItemFromLS(FAV_VIDEOS);
       setVideosList([]);
@@ -135,7 +139,10 @@ export const VideosListContextProvider = ({
 
   const reloadVideosList = () => {
     const currentVideos = getLocalStorage(FAV_VIDEOS) ?? null;
-    if (currentVideos) setVideosList(currentVideos);
+    if (currentVideos) {
+      setVideosList(currentVideos);
+      setVideosTotalCount(currentVideos.length);
+    }
   };
 
   const updateState = (newVideosList: TVideosArrItem[]) => {
@@ -154,7 +161,7 @@ export const VideosListContextProvider = ({
   };
 
   const addOrRemoveVideoFromFavorite = (
-    url: string,
+    url: string | undefined,
     action: EFavoriteVideosActions
   ) => {
     const currentVideos = getLocalStorage(FAV_VIDEOS);
@@ -164,11 +171,11 @@ export const VideosListContextProvider = ({
     currentVideos[videoIndex].favorite = action === EFavoriteVideosActions.ADD;
     currentVideos[videoIndex].favorite === true
       ? toast.success('Dodano do ulubionych')
-      : toast.error('Usunięto z ulubionych');
+      : toast.success('Usunięto z ulubionych');
     updateState(currentVideos);
   };
 
-  const deleteSingleVideo = (url: string) => {
+  const deleteSingleVideo = (url: string | undefined) => {
     const currentVideos = getLocalStorage(FAV_VIDEOS);
     const videoIndex = currentVideos.findIndex(
       (item: TVideosArrItem) => item.path === url
@@ -254,6 +261,7 @@ export const VideosListContextProvider = ({
   const memoizedValue = useMemo(
     () => ({
       videosList: currentVideosList,
+      videosTotalCount,
       currentPage,
       displayType,
       listType,
@@ -272,6 +280,7 @@ export const VideosListContextProvider = ({
     }),
     [
       JSON.stringify(videosList),
+      videosList.length,
       currentPage,
       orderBy,
       displayType,

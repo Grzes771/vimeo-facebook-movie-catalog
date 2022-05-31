@@ -1,14 +1,27 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import { useEffect } from 'react';
 import YouTube, { YouTubeProps } from 'react-youtube';
+import { useNavigate } from 'react-router-dom';
 import Vimeo from '@u-wave/react-vimeo';
-import ReactDOM from 'react-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useVideosListContext } from 'contexts/video-list-context';
 
-import { EVideosPlatform } from 'types/video-list-context-enums';
+import {
+  faEye,
+  faStar,
+  faThumbsUp,
+  faTrashAlt,
+} from '@fortawesome/free-solid-svg-icons';
 
-import './style.css';
+import {
+  EFavoriteVideosActions,
+  EVideosPlatform,
+} from 'types/video-list-context-enums';
+
+import { VIMEO_YOUTUBE_MOVIE_CATALOG } from 'App';
+
 import * as S from './index.styles';
+import './style.css';
 
 const youTubeOptions = {
   height: '450px',
@@ -18,65 +31,104 @@ const youTubeOptions = {
   },
 };
 
-type TModalShowVideo = {
-  setModalIsOpen: Dispatch<SetStateAction<boolean>>;
-};
+export const VideoModal = () => {
+  const {
+    singleVideo,
+    displayType,
+    setSingleVideo,
+    addOrRemoveVideoFromFavorite,
+    deleteSingleVideo,
+  } = useVideosListContext();
 
-export const VideoModal = ({ setModalIsOpen }: TModalShowVideo) => {
-  const { modalIsActive, setModalIsActive, singleVideo, setSingleVideo } =
-    useVideosListContext();
+  const navigate = useNavigate();
+
+  const DELETE_ITEM_MODAL_MESSAGE = 'Czy na pewno chcesz usunąć ten film?';
 
   const onReady: YouTubeProps['onReady'] = (event) => {
     event.target.pauseVideo();
   };
 
   useEffect(() => {
-    setModalIsOpen(modalIsActive);
-  }, [modalIsActive]);
+    if (!singleVideo) navigate(`/${VIMEO_YOUTUBE_MOVIE_CATALOG}`);
+  }, []);
 
+  const handleDeleteSingleMovie = () => {
+    if (window.confirm(DELETE_ITEM_MODAL_MESSAGE))
+      deleteSingleVideo(singleVideo?.path);
+  };
+
+  const parseDate = (miliseconds: number | undefined) => {
+    if (!miliseconds) return '';
+    const currentDate = new Date(miliseconds);
+    return currentDate.toISOString().split('T')[0];
+  };
+  console.log(parseDate);
   return (
     <S.Container>
-      {modalIsActive && (
-        <S.ModalStyle data-testid="modal">
-          <S.ModalHeaderStyle>{singleVideo?.title}</S.ModalHeaderStyle>
-          <S.ModalBodyStyle>
-            {singleVideo?.platform === EVideosPlatform.YOUTUBE ? (
-              <YouTube
-                videoId={singleVideo?.path}
-                opts={youTubeOptions}
-                onReady={onReady}
-              />
-            ) : (
-              //@ts-ignore
-              <Vimeo
-                video={singleVideo?.path ?? ''}
-                autoplay
-                width="300px"
-                responsive
-              />
-            )}
-          </S.ModalBodyStyle>
-          <S.ModalFooterStyle>
-            <S.StyledButton
-              color="secondary"
-              type="submit"
-              aria-label="modal"
-              onClick={() => {
-                setSingleVideo(undefined);
-                setModalIsActive(false);
-              }}
-            >
-              close
-            </S.StyledButton>
-          </S.ModalFooterStyle>
-        </S.ModalStyle>
-      )}
+      <S.ModalHeaderStyle>
+        <p>{singleVideo?.title}</p>
+        <div>
+          <span>
+            <FontAwesomeIcon
+              icon={faStar}
+              className={`${
+                singleVideo?.favorite === true ? 'active-star' : ''
+              }`}
+              onClick={() =>
+                addOrRemoveVideoFromFavorite(
+                  singleVideo?.path,
+                  singleVideo?.favorite
+                    ? EFavoriteVideosActions.REMOVE
+                    : EFavoriteVideosActions.ADD
+                )
+              }
+            />
+          </span>
+          <span>
+            <FontAwesomeIcon
+              data-testid="remove-icon"
+              icon={faTrashAlt}
+              onClick={handleDeleteSingleMovie}
+            />
+          </span>
+        </div>
+      </S.ModalHeaderStyle>
+      <S.ModalStyle data-testid="modal">
+        <S.ModalBodyStyle>
+          {singleVideo?.platform === EVideosPlatform.YOUTUBE ? (
+            <YouTube
+              videoId={singleVideo?.path}
+              opts={youTubeOptions}
+              onReady={onReady}
+            />
+          ) : (
+            //@ts-ignore
+            <Vimeo
+              video={singleVideo?.path ?? ''}
+              autoplay
+              width="300px"
+              responsive
+            />
+          )}
+        </S.ModalBodyStyle>
+      </S.ModalStyle>
+      <S.ModalFooterStyle>
+        <div>
+          {singleVideo?.viewsCount && (
+            <span>
+              <FontAwesomeIcon icon={faEye} />
+              {` ${singleVideo?.viewsCount}`}
+            </span>
+          )}
+          {singleVideo?.likes && (
+            <span>
+              <FontAwesomeIcon icon={faThumbsUp} />
+              {` ${singleVideo?.likes}`}
+            </span>
+          )}
+        </div>
+        <p>Data dodania: {parseDate(singleVideo?.date)}</p>
+      </S.ModalFooterStyle>
     </S.Container>
   );
 };
-
-export const ModalShowVideo = ({ setModalIsOpen }: any) =>
-  ReactDOM.createPortal(
-    <VideoModal {...{ setModalIsOpen }} />,
-    document.getElementById('root')!
-  );

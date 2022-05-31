@@ -42,6 +42,7 @@ export const StyledForm = styled.form`
     }
     @media (max-width: 620px) {
       margin-right: 0px;
+      width: 80vw;
     }
   }
 `;

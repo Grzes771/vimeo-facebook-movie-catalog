@@ -14,7 +14,7 @@ import 'react-block-ui/style.css';
 import { MovieContainer, Container } from './index.styles';
 
 export const MovieList = () => {
-  const { videosList, displayType } = useVideosListContext();
+  const { videosList, videosTotalCount, displayType } = useVideosListContext();
 
   const addYoutubeVideoIsLoading = useSelector(addYoutubeVideoIsLoadingRX);
   const addVimeoVideoIsLoading = useSelector(addVimeoVideoIsLoadingRX);
@@ -32,12 +32,7 @@ export const MovieList = () => {
           {displayAllMovies(videosList)}
         </MovieContainer>
       </Container>
-      {videosList.length < 6 ? null : (
-        <ListPagination
-          filterAndSort={videosList}
-          filterAndSortFavorite={videosList}
-        />
-      )}
+      {videosTotalCount < 13 ? null : <ListPagination />}
     </BlockUi>
   );
 };
