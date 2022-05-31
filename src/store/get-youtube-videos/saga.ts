@@ -68,12 +68,14 @@ export function* getYoutubeVideos({
 
     if (!isAlreadyAdded && !!parsedYoutubeVideos[0])
       addItemToLS(parsedYoutubeVideos[0]);
-    if (isAlreadyAdded) toast.error('Ten film jest już dodany');
+    if (isAlreadyAdded) {
+      toast.error('Ten film jest już dodany');
+    } else if (!isAlreadyAdded && request.data?.items?.length)
+      toast.success('Film został dodany');
 
     yield put({
       type: C.GET_YOUTUBE_VIDEOS_DATA.success,
     });
-    toast.success('Film został dodany');
   } catch (e) {
     toast.error('Coś poszło nie tak');
 
