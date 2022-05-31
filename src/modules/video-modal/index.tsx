@@ -63,7 +63,6 @@ export const VideoModal = () => {
     return currentDate.toISOString().split('T')[0];
   };
 
-  console.log(parseDate);
   return (
     <S.Container>
       <S.ModalHeaderStyle>

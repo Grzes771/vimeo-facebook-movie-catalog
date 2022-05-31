@@ -126,6 +126,8 @@ export const VideosListContextProvider = ({
   const loadDemo = () => {
     const demoArr = [...YOUTUBE_DEMO, ...VIMEO_DEMO];
     setLocalStorage(FAV_VIDEOS, demoArr);
+    const currentVideos = getLocalStorage(FAV_VIDEOS);
+    setVideosTotalCount(currentVideos.length);
     setVideosList(demoArr);
   };
 
@@ -135,6 +137,7 @@ export const VideosListContextProvider = ({
       deleteItemFromLS(FAV_VIDEOS);
       setVideosList([]);
     }
+    setVideosTotalCount(0);
   };
 
   const reloadVideosList = () => {

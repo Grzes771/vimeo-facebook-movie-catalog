@@ -50,8 +50,6 @@ export const SingleMovie = ({ movie }: TSingleMovie) => {
         ? getVideoIdFromUrl(movie.path)
         : movie.path;
 
-    console.log({ movieId });
-
     navigate(`/${VIMEO_YOUTUBE_MOVIE_CATALOG}/${movieId}`);
   };
 

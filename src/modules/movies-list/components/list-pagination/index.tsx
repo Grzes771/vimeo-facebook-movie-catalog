@@ -32,8 +32,6 @@ export const ListPagination = () => {
     setCurrentPage(index);
   };
 
-  console.log({ currentPage, pagesCount });
-
   return (
     <div>
       <S.Container aria-label="Page navigation example">

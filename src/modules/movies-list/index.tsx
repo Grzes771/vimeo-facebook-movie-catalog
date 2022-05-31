@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SingleMovie } from './components/single-video';
 import { useSelector } from 'react-redux';
 import BlockUi from 'react-block-ui';
