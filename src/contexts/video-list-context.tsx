@@ -173,6 +173,7 @@ export const VideosListContextProvider = ({
       ? toast.success('Dodano do ulubionych')
       : toast.success('Usunięto z ulubionych');
     updateState(currentVideos);
+    setSingleVideo(currentVideos[videoIndex]);
   };
 
   const deleteSingleVideo = (url: string | undefined) => {
@@ -184,6 +185,7 @@ export const VideosListContextProvider = ({
       ? toast.error('Nie znaleziono filmu')
       : currentVideos.splice(videoIndex, 1);
     updateState(currentVideos);
+
     toast.success('Film usunięty');
   };
 

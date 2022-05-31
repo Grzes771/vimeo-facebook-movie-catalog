@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import YouTube, { YouTubeProps } from 'react-youtube';
 import { useNavigate } from 'react-router-dom';
 import Vimeo from '@u-wave/react-vimeo';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useVideosListContext } from 'contexts/video-list-context';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEye,
   faStar,
@@ -34,8 +34,7 @@ const youTubeOptions = {
 export const VideoModal = () => {
   const {
     singleVideo,
-    displayType,
-    setSingleVideo,
+
     addOrRemoveVideoFromFavorite,
     deleteSingleVideo,
   } = useVideosListContext();
@@ -55,6 +54,7 @@ export const VideoModal = () => {
   const handleDeleteSingleMovie = () => {
     if (window.confirm(DELETE_ITEM_MODAL_MESSAGE))
       deleteSingleVideo(singleVideo?.path);
+    navigate(`/${VIMEO_YOUTUBE_MOVIE_CATALOG}`);
   };
 
   const parseDate = (miliseconds: number | undefined) => {
@@ -62,6 +62,7 @@ export const VideoModal = () => {
     const currentDate = new Date(miliseconds);
     return currentDate.toISOString().split('T')[0];
   };
+
   console.log(parseDate);
   return (
     <S.Container>

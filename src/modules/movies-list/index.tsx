@@ -8,7 +8,7 @@ import { addVimeoVideoIsLoadingRX } from 'store/get-vimeo-videos/selectors';
 import { TVideosArrItem } from 'store/types/movie-item';
 import { useVideosListContext } from 'contexts/video-list-context';
 
-import { ListPagination } from '../list-pagination/index';
+import { ListPagination } from './components/list-pagination';
 
 import 'react-block-ui/style.css';
 import { MovieContainer, Container } from './index.styles';
@@ -32,8 +32,9 @@ export const MovieList = () => {
           {displayAllMovies(videosList)}
         </MovieContainer>
       </Container>
-      {videosTotalCount < 13 ? null : <ListPagination />}
+      {videosTotalCount > 12 && <ListPagination />}
     </BlockUi>
   );
 };
+
 export default MovieList;

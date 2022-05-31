@@ -24,4 +24,48 @@ export const VIMEO_DEMO: readonly TVideosArrItem[] = Object.freeze([
     title: 'Every Other Week',
     viewsCount: 4325,
   },
+  {
+    date: 1670534257162,
+    favorite: false,
+    likes: 332,
+    path: 'https://vimeo.com/706175904',
+    platform: EVideosPlatform.VIMEO,
+    thumbNails:
+      'https://i.vimeocdn.com/video/1425567780-0a3f08eaf7ef2e020e7f19b0e9ba74ac8356cba43a51b45d4ffe7c4ecca7f058-d_960x540?r=pad',
+    title: 'The Kites',
+    viewsCount: 122000,
+  },
+  {
+    date: 1680534257162,
+    favorite: false,
+    likes: 311,
+    path: 'https://vimeo.com/703459983',
+    platform: EVideosPlatform.VIMEO,
+    thumbNails:
+      'https://i.vimeocdn.com/video/1421009813-92ab5b66626b65d7a29a6d60f4e1b35ea193c4402c87447d758498604fb16ed5-d_960x540?r=pad',
+    title: 'The Journey',
+    viewsCount: 169000,
+  },
+  {
+    date: 1680534257162,
+    favorite: false,
+    likes: 311,
+    path: 'https://vimeo.com/624629606',
+    platform: EVideosPlatform.VIMEO,
+    thumbNails:
+      'https://i.vimeocdn.com/video/1266918804-f4a829400b85d5516dd8158c5d2b86ccb881fafe15610706a_960x540?r=pad',
+    title: 'NABS: This Job Will Break You',
+    viewsCount: 169000,
+  },
+  {
+    date: 1680534257162,
+    favorite: false,
+    likes: 1026,
+    path: 'https://vimeo.com/698459270',
+    platform: EVideosPlatform.VIMEO,
+    thumbNails:
+      'https://i.vimeocdn.com/video/1412620770-b43831efbbc400e39e036a562397a8e2a420d19cff7457ff448467dfb9462e38-d_960x540?r=pad',
+    title: 'FLOW',
+    viewsCount: 51340,
+  },
 ]);
